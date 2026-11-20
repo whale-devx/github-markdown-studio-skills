@@ -45,6 +45,41 @@ with pip 25.2. These results cover the documented commands on Windows.
 Independent reader outcomes, other hosts, comparative quality and inference
 cost were unmeasured.
 
+### Decision table and transaction recovery
+
+The [CSV reference](../evals/authoring/csv-triage.md) helps an importer
+distinguish a blank cell from a missing column or surplus data. The
+[SQLite runbook](../evals/authoring/sqlite-recovery.md) gives an operator
+two choices after a deferred foreign key prevents a commit. The tasks were
+fixed before opening the source manuals. Codex desktop used a fresh project
+installation of the skill at `16f5445`. All 17 installed files matched the
+Git tree after line-ending normalization. The author and evaluator shared
+the task criteria. [Trial protocol](../evals/authoring/protocol.md#advanced-structures-on-two-external-tasks)
+
+On Windows, CPython 3.12.8 with SQLite 3.45.3 and CPython 3.14.0 with
+SQLite 3.50.4 each passed the three [example tests](../tests/test_authoring_examples.py).
+The replay compared all four CSV rows with their decision-table entries
+and ran the printed Python example. In two disposable databases the first
+commit failed and the transaction stayed open. A second connection could
+see only the earlier committed item. After repair it could read both items
+on reopening. After rollback it could read only the original item. A separate
+check confirmed that enabling foreign keys inside an open transaction had
+no effect. To repeat, run `python tests/test_authoring_examples.py -v`.
+
+Signed-out Edge 157.0.4341.60 opened both GitHub files at 360 × 800 and
+1280 × 800 CSS pixels with light and dark preferences. In the original
+four-column reference, the narrow table needed 185 pixels of horizontal
+scrolling to expose the final decision. The table took keyboard focus and
+Right Arrow reached that column. The revised table keeps each parsed value
+beside its import decision. All four rows fit at both widths with zero
+horizontal scroll. [Original table](https://github.com/whale-devx/github-markdown-studio-skills/blob/3ea655d7af4e340186a284db5c4a9c981d508088/evals/authoring/csv-triage.md) · [Revised table](https://github.com/whale-devx/github-markdown-studio-skills/blob/af401f3ebb00727ce6e8b9c65c516dfc30dada6d/evals/authoring/csv-triage.md)
+
+In all eight revised views, Tab reached the disclosure, Enter opened its
+sample and Space closed it. The SQLite alert and both recovery choices
+were outside the disclosure. These observations cover the GitHub repository
+file view. Independent reader outcomes and screen-reader and touch interaction
+remain unmeasured. [Rendered runbook](https://github.com/whale-devx/github-markdown-studio-skills/blob/af401f3ebb00727ce6e8b9c65c516dfc30dada6d/evals/authoring/sqlite-recovery.md)
+
 ### Live diagram viewers in the English and Thai showcase
 
 On 2026-11-21 a signed-out Edge 157.0.4341.60 session opened the

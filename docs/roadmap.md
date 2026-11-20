@@ -28,7 +28,7 @@
 - [x] Check linked destinations and narrow-screen table access on existing GitHub issues, pull requests, comments and a commit page in both themes.
 - [x] Inspect published wiki and Discussion examples in the same four theme and viewport combinations. The wiki link opened the page but missed the heading.
 - [x] Turn external ripgrep and uv manuals held out from skill development into a reference and a recovery runbook. [Authoring trial and replay](validation.md#external-project-authoring)
-- [ ] Evaluate advanced structures beyond code blocks and links on held-out projects.
+- [x] Evaluate a decision table, a recovery alert and collapsible examples on held-out CSV and SQLite tasks. [Runtime and GitHub rendering results](validation.md#decision-table-and-transaction-recovery)
 
 ## Beta readiness
 
