@@ -6,8 +6,8 @@
       "source": "README.md",
       "target": "README.th.md",
       "language": "th",
-      "source_sha256": "5300ba9332c246a4e81192ebf2b5f8c501696bfcbba804c00318e30f691ef38b",
-      "target_sha256": "78d2f26fac864c43f6d06c4b77441f1e981a3d2f23744c5f2b76954f58c61a30"
+      "source_sha256": "3cc30e3e28db7c9d5144ea556dd19f6a7746ae24dd1f34c27aa167028facbb57",
+      "target_sha256": "adb48f6183e6225899b84d6f6514dc8a13659de0795af689fbd899acaa961f2c"
     },
     {
       "source": "examples/advanced-formatting.en.md",
