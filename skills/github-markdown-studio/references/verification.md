@@ -28,6 +28,33 @@ Important limitations: not the full GitHub Markdown pipeline; not full HTML vali
 
 `--strict` returns exit 1 for warnings or errors. Otherwise errors alone cause exit 1. Usage errors cause exit 2. `--json` writes structured output to stdout; the caller decides whether to save it. The helper itself does not write repository files.
 
+### Check selected external pages
+
+Run [external_links.py](../scripts/external_links.py) with the audit dependencies from the installed skill. Give it the repository root and one or more Markdown files or directories. Start with the offline inventory. It lists page URLs and source locations in JSON. A line number identifies the Markdown block containing the reference.
+
+```sh
+python <skill-dir>/scripts/external_links.py <repo-root> docs/guide.md
+```
+
+Review the URLs locally, including any identifying information in their paths. With permission to contact a specific public page, copy its exact URL into `--check`. The following example selects one link in this repository. Run it from the repository root.
+
+```sh
+python skills/github-markdown-studio/scripts/external_links.py . skills/github-markdown-studio/references/github-rendering.md --check https://github.com/github/markup
+```
+
+The checker attempts one anonymous HTTPS HEAD request per distinct selected page. Repeat `--check` for up to 20 pages. Selection is validated against the entire inventory before the first DNS lookup. Fragments share a page check. Query-bearing links, credentials, contact schemes and unsupported URL forms appear only as omitted locations. For those links, review the original document locally.
+
+The checker uses system curl 7.59+ and system TLS trust. Use `--curl` with an absolute path if curl is installed elsewhere. It checks resolved addresses, pins them for the request, and disables curl configuration, proxies and redirects. Each transfer has a ten-second limit. Name resolution uses the system resolver. The helper sends no document body, authentication headers or cookies. The selected site still sees the requested path and the client's IP address. [curl options](https://curl.se/docs/manpage.html)
+
+| Result | Meaning |
+| --- | --- |
+| `pass` | The page returned HTTP 2xx. Anchor existence, content quality and rendering require separate checks. |
+| `fail` | The endpoint returned 404 or 410. Inspect the link at the reported source location. |
+| `blocked` | Redirect, rejected HEAD, rate limit, other inconclusive HTTP response, non-public address or transport failure. |
+| `not-run` | The URL was inventoried only. |
+
+A successful inventory or a run where every selected page passes exits 0. A failed or blocked check exits 1. Invalid input exits 2. Tests use a simulated transport and the standard audit stays offline.
+
 ## Report template
 
 | Check | Status | Evidence / limitation |

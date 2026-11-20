@@ -70,7 +70,7 @@ For a non-editing review, ask for `audit`. The other modes are `create`, `improv
 | Safe editing | Scope boundaries, preserved frontmatter, evidence requirements and no implicit publishing |
 | Cross-agent portability | Standard Agent Skills instructions and an optional capability-only preflight, with no model SDK |
 
-Other locales can follow the workflow, but are not all linguistically or visually tested. The helpers do not automatically translate prose, execute quick starts, contact remote links, render Mermaid or certify GitHub's actual output.
+Other locales can follow the workflow, but are not all linguistically or visually tested. The helpers do not automatically translate prose, execute quick starts, render Mermaid or certify GitHub's actual output. To check external pages, preview their URLs offline, then select individual pages for an anonymous HTTPS check. [External link checks](skills/github-markdown-studio/references/verification.md#check-selected-external-pages)
 
 ## Advanced formatting, beyond README
 

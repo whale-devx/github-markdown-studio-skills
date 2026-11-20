@@ -182,7 +182,8 @@ class HTMLChecks(HTMLParser):
 
 
 class Auditor:
-    def __init__(self, root: Path, surface: str = "repository", pr_target: str = "unknown"):
+    def __init__(self, root: Path, surface: str = "repository", pr_target: str = "unknown", *,
+                 external_references: list | None = None):
         if surface not in advanced.SURFACES or pr_target not in advanced.TARGETS:
             raise ValueError("Invalid rendering surface or pull-request target")
         self.surface, self.pr_target = surface, pr_target
@@ -190,6 +191,7 @@ class Auditor:
         self.findings: list[Finding] = []
         self.documents: dict[Path, tuple[list, set[str]]] = {}
         self.external_links = 0
+        self.external_references = external_references
         self.checked = 0
 
     def add(self, path: Path, severity: str, code: str, line: int, message: str) -> None:
@@ -244,6 +246,8 @@ class Auditor:
                     self.add(source, "error", "UNSAFE_URL", line, "Use repository-relative paths or ordinary web/contact URLs.")
                 else:
                     self.external_links += 1
+                    if self.external_references is not None:
+                        self.external_references.append((source.relative_to(self.root).as_posix(), line, url))
                 return
             raw = unquote(parsed.path)
             if "\x00" in raw or "\\" in raw:

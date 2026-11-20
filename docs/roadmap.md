@@ -44,7 +44,7 @@ See the [validation record](validation.md) for host versions, scope and reproduc
 - [ ] Verify rendered documents on GitHub in both themes and narrow layouts.
 - [ ] Run host image generation/editing end to end with a real image tool.
 - [ ] Extend language review beyond English and Thai, including native RTL review.
-- [ ] Add a documented external-link checker with explicit network controls.
+- [x] Add a [documented external-link checker](../skills/github-markdown-studio/references/verification.md#check-selected-external-pages) with an offline inventory and explicit per-page network access.
 - [ ] Add optional Mermaid rendering checks against a recorded version.
 
 ## Comparative quality

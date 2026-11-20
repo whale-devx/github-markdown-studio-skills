@@ -26,6 +26,10 @@ Edge 157.0.4341.60 opened both [English](https://github.com/whale-devx/github-ma
 
 The article DOM also contained one alert, a footnote reference, two checkboxes, two pinned line links, six math elements and four diagram frames per page. These counts verify the surrounding markup. Inspect the interactive Mermaid, map and STL contents, highlighting, line navigation and mobile readability separately before claiming visual acceptance. These observations apply to repository files at the linked revision. Other GitHub surfaces and comparative reader evaluations remain outstanding.
 
+## External page availability on Windows (2026-11-21)
+
+The offline inventory found 19 distinct pages across the [formatting guide](../skills/github-markdown-studio/references/advanced-formatting.md) and the [rendering guide](../skills/github-markdown-studio/references/github-rendering.md) at source revision `f223281`. Each URL was reviewed and selected for one anonymous HTTPS HEAD using curl 8.22.0. All 19 returned HTTP 200. This observation covers those pages on that date. Fragment targets, redirects on other pages, site content and reader access in other networks require separate verification. [Reproduce the check](../skills/github-markdown-studio/references/verification.md#check-selected-external-pages)
+
 ## Global skill update on Windows (2026-11-20)
 
 Ran `npx skills update github-markdown-studio -g -y` against an existing installation. The CLI reported one updated skill. The installed entry point matched the repository text at `9a966ad`, and the installed references contained the new editorial review guidance. This exercised an update followed by explicit use in Codex. Fresh installation and automatic discovery remain separate checks.
