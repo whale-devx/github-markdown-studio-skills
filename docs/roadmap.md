@@ -11,6 +11,14 @@
 - [x] Read-only local audit helper and regression suite.
 - [x] Agent evaluation scenarios with explicit non-results status.
 
+## In progress: cross-provider portability (v0.2.0 development)
+
+- [x] Formalize one provider-neutral Agent Skills contract with no model SDK, hooks or proprietary tool declarations.
+- [x] Document cross-agent installation and what CLI support does **not** prove.
+- [x] Add an offline capability preflight (tri-state inventory and no provider-dependent dispatch).
+- [x] Add deterministic regression cases demonstrating identical decisions across different agent labels.
+- [ ] Execute actual install, activation and end-to-end tasks separately on multiple supported agent hosts.
+
 ## Next validation work
 
 - [ ] Exercise actual skill installation and invocation in selected supported agents.

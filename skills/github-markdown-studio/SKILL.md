@@ -2,10 +2,10 @@
 name: github-markdown-studio
 description: Create, improve, audit, and synchronize GitHub-rendered Markdown across a repository, not just README files. Use for documentation readability, tutorials, architecture, API references, runbooks, contribution guides, agent instructions, dark/light images, multilingual documentation, Mermaid diagrams, and explanatory image generation. Preserve factual evidence, machine-readable metadata, brand identity, and the requested editing scope.
 license: MIT
-compatibility: Works with agents that can read and edit repository files. Optional audit helper needs Python 3.10+ and listed dependencies. SVG generation needs only Python 3.10+. AI image generation and browser verification require tools supplied by the host agent.
+compatibility: Vendor-neutral Agent Skills format. Core writing instructions require host-provided document context and editing capability to apply changes. Optional offline helpers need Python 3.10+; image creation and browser verification require separately available host tools.
 metadata:
   author: whale-devx
-  version: "0.1.0"
+  version: "0.2.0-dev"
 ---
 
 # GitHub Markdown Studio
@@ -38,8 +38,17 @@ Infer the mode from the request; do not ask the user to fill in a questionnaire 
 - Translation workflow, locale links, glossary, drift: [multilingual documentation](references/multilingual.md).
 - Diagrams, image generation, composition consistency, provenance: [visual explanations](references/visual-explanations.md).
 - Evidence, permission boundaries, checks and reporting: [verification](references/verification.md).
+- Provider-neutral installation, capability inventory and fallback contracts: [agent portability](references/agent-portability.md).
 
-Always read verification when executing tools or claiming a check passed. Read multilingual and visual references when those capabilities are requested. One entry-point skill; no need to install separate writing or diagram skills.
+Always read verification when executing tools or claiming a check passed. Read agent portability when installation, agent/provider compatibility or tool availability matters. Read multilingual and visual references when those capabilities are requested. One entry-point skill; no need to install separate writing or diagram skills.
+
+## Capability-first execution across agents
+
+This is one standard Agent Skills directory for any compatible host—not a plugin or SDK tied to a model vendor. Never route on host, model, provider or tool **names**. Before choosing an implementation, inspect which capabilities the current host actually exposes: `read_files`, `write_files`, `run_commands`, `python`, `image_generate`, `image_edit`, `browser`, and `network`. Each is `true`, `false` or `unknown`; **unknown does not authorize an action**. Tool availability and permissions must be checked at the moment of use. Respect host-native policies and tool schemas; do not invent unavailable tools or require credentials from a specific model API.
+
+Plan only from the task and observed capabilities. With no Python, follow the instructions and manually review Markdown. With no image generation, do not label a deterministic SVG, Mermaid block or image prompt as an AI-generated illustration; report the requested image as blocked and offer an alternative. With no image editing, avoid independently generated dark/light pairs that claim to match. With no GitHub browser/network access, only local/static checks may be reported. Translation drafts always need language-quality review regardless of model provider.
+
+An optional [offline capability preflight](scripts/capability_plan.py) accepts a host-supplied JSON inventory; it **does not auto-detect tools, install agents, or execute tasks**. `ready` in its output means that required capabilities were declared—not that the result was tested. See the [portability reference](references/agent-portability.md) before using any agent-specific install instructions.
 
 ## Workflow
 
@@ -94,6 +103,7 @@ The bundled [renderer](scripts/render_diagram.py) creates localized, paired SVG 
 Inspect bundled scripts before running them. Resolve script paths relative to the installed skill directory, not the target repository. The root argument is the target repository boundary. Install dependencies only when allowed by the host/user; a missing dependency is `blocked`, not `pass`.
 
 ```bash
+python <skill-dir>/scripts/capability_plan.py --input <host-capabilities.json>
 python <skill-dir>/scripts/audit.py <repo-root> docs README.md --json
 python <skill-dir>/scripts/audit.py <repo-root> --translations i18n-manifest.json --strict
 python <skill-dir>/scripts/render_diagram.py <diagram-spec.json> --output <asset-directory>

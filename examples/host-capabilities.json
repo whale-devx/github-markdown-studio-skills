@@ -1,0 +1,21 @@
+{
+  "agent": "example-host-do-not-assume-provider",
+  "capabilities": {
+    "read_files": true,
+    "write_files": true,
+    "run_commands": true,
+    "python": true,
+    "image_generate": false,
+    "image_edit": false,
+    "browser": null,
+    "network": null
+  },
+  "tasks": [
+    "static_audit",
+    "edit_markdown",
+    "dark_light_assets",
+    "ai_illustration",
+    "multilingual_draft",
+    "github_preview"
+  ]
+}

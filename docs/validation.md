@@ -8,7 +8,7 @@ This record separates actual local checks from planned integration work. It is n
 
 | Check | Result | Scope |
 | --- | --- | --- |
-| Python regression suite | 58 tests passed | Markdown links and HTML, path boundaries, skill metadata, translation drift, SVG generation and overwrite protection |
+| Python regression suite | 74 tests passed | Markdown links and HTML, path boundaries, skill metadata, translation drift, SVG generation and overwrite protection |
 | SVG variants | Four generated and parsed | English/Thai, light/dark |
 | Theme pair consistency | Passed | Identical geometry and text for each locale; palette-only differences |
 | Palette contrast | Passed | Tested text/background pairs are at least 4.5:1; not a full accessibility certification |
@@ -20,11 +20,18 @@ This record separates actual local checks from planned integration work. It is n
 
 Local environment: Python 3.13.5, markdown-it-py 4.2.0, PyYAML 6.0.3, Chromium 144.0.7559.96 and Playwright 1.57.0. Browser previews used locally rendered Markdown and in-memory copies of generated SVGs. They did not use GitHub's renderer; navigation to local URLs was restricted in the execution environment.
 
+## Additional provider-neutral checks (v0.2.0 development)
+
+The local suite now includes **16 extra preflight tests** (74 total) for agent-label invariance, unknown vs false, read/write boundaries, AI imagery without an image tool, matched AI image editing, SVG/Mermaid fallback, local vs live GitHub preview, malformed inventories and CLI execution. These tests use simulated host capabilities and standard Python only. **They do not run Codex, Claude Code, Gemini CLI, Cursor or any other agent**, and do not prove that a host can discover or activate this skill.
+
+The preflight is deliberately host-supplied. Every task's execution status stays `not-run` even when its prerequisites are marked `ready`. Installing with a provider's CLI is still a separate verification step.
+
 ## Reproduce the deterministic checks
 
 ```bash
 python -m pip install -r skills/github-markdown-studio/scripts/requirements.txt
 python -m unittest discover -s tests -v
+python skills/github-markdown-studio/scripts/capability_plan.py --input examples/host-capabilities.json
 python skills/github-markdown-studio/scripts/audit.py . --translations i18n-manifest.json --strict
 python skills/github-markdown-studio/scripts/render_diagram.py examples/workflow.json --output /tmp/studio-assets
 ```

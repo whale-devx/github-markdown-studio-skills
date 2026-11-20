@@ -9,7 +9,8 @@
 ```mermaid
 flowchart TD
     A[Requested document scope] --> B[Agent reads SKILL.md]
-    B --> C[Relevant references and source evidence]
+    B --> K[Observe host capabilities]
+    K --> C[Relevant references and source evidence]
     C --> D[Create or revise Markdown]
     C --> E[Choose an explanatory visual]
     E --> F[Mermaid or offline SVG]
@@ -30,11 +31,19 @@ This describes the intended skill workflow, not a runtime orchestrator implement
 | `skills/github-markdown-studio/SKILL.md` | Scope, mode selection and workflow |
 | `references/` inside the skill | Document design, GitHub behavior, multilingual work, visual generation and verification |
 | `scripts/audit.py` | Offline read-only checks using Markdown tokens and selected HTML inspection |
+| `scripts/capability_plan.py` | Optional, standard-library-only method selection from explicitly supplied host capabilities; never discovers agents or executes work |
+| `references/agent-portability.md` | Cross-agent installation guidance, permission boundaries and truthful compatibility reporting |
 | `scripts/render_diagram.py` | Deterministic localized light/dark SVGs from JSON |
 | `assets/` inside the skill | Image brief and glossary templates |
 | `i18n-manifest.json` | Reviewed source/translation byte snapshots |
 | `tests/` | Executed regression checks for helper behavior |
 | `evals/` | Proposed agent-level evaluation scenarios; not benchmark results |
+
+## Provider-neutral boundary
+
+The skill contains no LLM SDK or provider-specific execution branch. An Agent Skills-compatible host loads `SKILL.md`; its actual tools, permissions and sandbox determine what work can happen. The capability inventory has three states (`true`, `false`, `unknown`). For optional operations, choose a host-native tool by *capability*, not by model name. A capability preflight report is a plan, not proof of execution or agent activation.
+
+Image generation, image editing, browser screenshots and live GitHub checks must be confirmed separately. Offline SVG and Mermaid are deliberate alternatives, never mislabeled AI imagery. See the [portability reference](../skills/github-markdown-studio/references/agent-portability.md).
 
 ## Trust boundary
 

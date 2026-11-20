@@ -27,6 +27,26 @@ Create an English and Thai getting-started guide from the implementation.
 Keep commands identical. Add an explanatory diagram only if it improves understanding.
 ```
 
+## Provider-neutral installation and preflight
+
+The same skill files are used for all compatible clients. Select a target with the Skills CLI's documented `-a` IDs; do not edit `SKILL.md` to change models. Examples below illustrate installation syntax, **not verified activations**:
+
+```bash
+npx skills add . --skill github-markdown-studio -a codex
+npx skills add . --skill github-markdown-studio -a claude-code
+npx skills add . --skill github-markdown-studio -a gemini-cli
+```
+
+For hosts without built-in skills discovery, supplying the text and relevant references is possible, but automatic activation is not established. A chat-only model cannot inspect or edit a repository without file tools. See [agent portability](../skills/github-markdown-studio/references/agent-portability.md) and the upstream [supported-agent list](https://github.com/vercel-labs/skills/blob/main/docs/agents.md).
+
+Optional preflight with an explicit example inventory (no provider API or automatic tool discovery):
+
+```bash
+python skills/github-markdown-studio/scripts/capability_plan.py --input examples/host-capabilities.json
+```
+
+All returned tasks have `execution: not-run`; `ready` is a declared prerequisite check only. `false` blocks a required capability and omitted/null values stay unverified. Never invent an image, browser check or execution result to satisfy a missing tool. Python is unnecessary for the skill's general writing instructions; if no Python runtime is available, skip this helper entirely.
+
 ## Run the audit helper
 
 From this repository's root:
