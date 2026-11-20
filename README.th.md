@@ -11,7 +11,7 @@
 
 ## ติดตั้ง
 
-เมื่อสกิลอยู่บน default branch ของ repository แล้ว:
+ติดตั้งสกิลจาก GitHub ด้วยคำสั่งนี้
 
 ```bash
 npx skills add whale-devx/github-markdown-studio-skills --skill github-markdown-studio
