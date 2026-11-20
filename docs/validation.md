@@ -4,6 +4,10 @@
 
 This record separates actual local checks from planned integration work. It is not an agent benchmark or a claim of universal GitHub compatibility.
 
+## Global skill update on Windows (2026-11-20)
+
+Ran `npx skills update github-markdown-studio -g -y` against an existing installation. The CLI reported one updated skill. The installed entry point matched the repository text at `9a966ad`, and the installed references contained the new editorial review guidance. This exercised an update followed by explicit use in Codex. Fresh installation and automatic discovery remain separate checks.
+
 ## v0.3 advanced-formatting validation (2026-11-20)
 
 Executed against this development change with Python 3.13.5, markdown-it-py 4.2.0 and PyYAML 6.0.3. No dependency was added.

@@ -11,7 +11,7 @@ Create, improve, audit and synchronize GitHub documentation—not just READMEs. 
 
 ## Install
 
-Once the skill is available on the repository's default branch:
+Install the skill from GitHub:
 
 ```bash
 npx skills add whale-devx/github-markdown-studio-skills --skill github-markdown-studio

@@ -14,7 +14,7 @@ python -m unittest discover -s tests -v
 python skills/github-markdown-studio/scripts/audit.py . --translations i18n-manifest.json --strict
 ```
 
-Changes to the source README require a reviewed Thai update and new source/target hashes in the translation manifest. Do not refresh hashes without reviewing the translation. Changes to the example JSON require regeneration and review of both themes in every locale.
+Changes to the source README require a reviewed Thai update and new source/target hashes in the translation manifest. Do not refresh hashes without reviewing the translation. Changes to the [workflow diagram specification](examples/workflow.json) require regeneration and review of both themes in every locale. Follow the [asset reproduction steps](examples/README.md#reproduce-the-assets).
 
 ## Change review
 

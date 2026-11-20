@@ -15,6 +15,12 @@ npx skills add . --skill github-markdown-studio
 
 The CLI downloads its own package if needed; it needs network access and its documented Node.js version. CLI installation is separate from Python helper dependencies. The skill format is portable, but individual agent activation, image tools and browsers depend on the host and have not all been tested here.
 
+If you already installed the skill globally from GitHub, update that copy with the following command. For a project installation, use `-p` in the project directory.
+
+```bash
+npx skills update github-markdown-studio -g -y
+```
+
 Request a scope and outcome, such as:
 
 ```text
