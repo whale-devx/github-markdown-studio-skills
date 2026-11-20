@@ -4,9 +4,7 @@
 
 This record separates actual local checks from planned integration work. It is not an agent benchmark or a claim of universal GitHub compatibility.
 
-## Windows beta-readiness check (2026-11-20)
-
-### Follow-up on the first-run guide, 2026-11-21
+## Follow-up on the first-run guide, 2026-11-21
 
 Codex desktop 26.1111.2228.0 on Windows explicitly used GitHub Markdown Studio
 in maintainer mode with the [first-run fixture](../evals/first-run-guide.json)
@@ -20,6 +18,8 @@ of the edited file reported one file, zero errors and zero warnings.
 The evaluator could see the rubric. This is a repeatable explicit-edit
 observation. Blinded reader trials, project-only discovery and the blocked
 Copilot CLI edit trial are still open.
+
+## Windows beta-readiness check (2026-11-20)
 
 The starting revision was `785bf30`. On Windows with Python 3.12, the original 131-test suite had three errors: one locale-dependent read of a Thai fixture and two attempts to create symlinks without the Windows privilege. After the fixes, 133 tests ran, 131 passed and only the two privilege-dependent cases skipped locally. SVG regeneration matched the tracked assets byte for byte. The new on-disk digest test covers Windows newline conversion.
 
