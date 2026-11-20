@@ -1,5 +1,3 @@
-[Installation for Codex, Claude Code, Cursor, Gemini CLI, Kiro and API clients](docs/PORTABILITY.md)
-
 # GitHub Markdown Studio
 
 **One skill. Every Markdown document. Evidence first.**
@@ -12,6 +10,8 @@ Create, improve, audit and synchronize GitHub documentation—not just READMEs. 
 > **This is an evolving implementation, not a benchmark winner or a universal agent certification.** The skill supplies agent instructions and tested offline helpers. AI illustration generation requires an image tool from the host agent; the bundled SVG generator is deterministic, not AI-generated imagery.
 
 ## Install
+
+[Installation by agent and API client](docs/PORTABILITY.md)
 
 Install the skill from GitHub:
 
