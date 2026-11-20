@@ -1,13 +1,8 @@
 # GitHub Markdown Studio
 
-**One skill. Every Markdown document. Evidence first.**
-
 English · [ไทย](README.th.md)
 
-Create, improve, audit and synchronize GitHub documentation—not just READMEs. Make guides, architecture notes, references and runbooks easier to understand with appropriate visuals, matching light/dark assets, and deliberate multilingual workflows.
-
-> [!IMPORTANT]
-> **This is an evolving implementation, not a benchmark winner or a universal agent certification.** The skill supplies agent instructions and tested offline helpers. AI illustration generation requires an image tool from the host agent; the bundled SVG generator is deterministic, not AI-generated imagery.
+Use this skill to help readers complete a task from your GitHub documentation. Give your agent a file, an audience and an outcome. It can review a guide, improve its examples or bring a translation up to date.
 
 ## Install
 
@@ -25,6 +20,16 @@ npx skills add . --skill github-markdown-studio
 
 Add `-g` to install at user scope, or `-a <agent-id>` to choose a supported agent. The current Skills CLI documents Node.js 22.20+; consult its [installation reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md). Installation makes the instructions available; it does not add image-generation tools or browser access to your agent.
 
+## Try it on this repository
+
+After installation, open this checkout in your agent and ask:
+
+~~~text
+Use github-markdown-studio in audit mode on README.md. Can a new contributor find the local install command and a first task to try? Cite the relevant headings and report any gaps.
+~~~
+
+Expect a review with findings and no file edits. To apply a fix, use `improve` and name the file. Use `create` for a new document or `sync` to bring an existing translation up to date.
+
 ## Works across agent and model providers
 
 The skill is **provider-agnostic**: one standard `SKILL.md`, without a required model API, SDK, token, proprietary tool, or provider-specific fork. It can be installed through any compatible Agent Skills loader. The Skills CLI lists Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot, OpenCode, Windsurf, Cline, Roo Code and others; **CLI support does not mean this project has tested those agents end to end**. [See the portability contract](skills/github-markdown-studio/references/agent-portability.md).
@@ -38,19 +43,6 @@ python skills/github-markdown-studio/scripts/capability_plan.py --input examples
 ```
 
 Available methods, not successful outcomes, are reported. Native installation and activation in each provider remain separate integration tests.
-
-## Ask for an outcome
-
-```text
-Use github-markdown-studio to improve docs/ for new contributors.
-Preserve verified facts and existing brand assets.
-Support light and dark themes, and produce English and Thai versions.
-Use diagrams or generated illustrations only where they improve understanding.
-Report what was checked and what could not be verified.
-Do not change application code or repository settings.
-```
-
-For a non-editing review, ask for `audit`. The other modes are `create`, `improve` and `sync`. Limit the request to a file, folder or an explicit repository-wide pass.
 
 ## What is included
 
