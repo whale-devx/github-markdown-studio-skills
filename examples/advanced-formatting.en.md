@@ -54,7 +54,7 @@ print("nested fence example")
 
 ## Diagrams
 
-The maps contain a synthetic point; the mesh is only one open triangle, not a closed printable model.
+Read the evidence, choose a format, then check and report the result. Both maps place one synthetic point at longitude 0°, latitude 0° in the Atlantic Ocean. The STL shows a single open triangle. A printable solid would need a closed surface.
 
 ```mermaid
 flowchart LR

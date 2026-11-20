@@ -4,7 +4,27 @@
 
 This record separates actual local checks from planned integration work. It is not an agent benchmark or a claim of universal GitHub compatibility.
 
-## Follow-up on the first-run guide, 2026-11-21
+## Windows validation on 2026-11-21
+
+### Live diagram viewers in the English and Thai showcase
+
+On 2026-11-21 a signed-out Edge 157.0.4341.60 session opened the
+[English](https://github.com/whale-devx/github-markdown-studio-skills/blob/f2232810ed65da3bbdc63041fa72fae5d3a4ba47/examples/advanced-formatting.en.md)
+and [Thai](https://github.com/whale-devx/github-markdown-studio-skills/blob/f2232810ed65da3bbdc63041fa72fae5d3a4ba47/examples/advanced-formatting.th.md)
+repository files. To repeat, open each file in a fresh context at 360 × 800
+and 1280 × 800 CSS pixels, with light and dark color preferences. Scroll each
+diagram into view. Inspect the viewer contents and controls inside each frame.
+
+| Viewer | Observations in all eight contexts |
+| --- | --- |
+| Mermaid | The three localized labels and two connecting edges rendered. At 360 px GitHub controls partly covered the final node. The examples now include the sequence in the surrounding text. |
+| GeoJSON and TopoJSON | Both showed one pin over open water. Wait for the map's accessible location to say “Atlantic Ocean” before taking screenshots. The canvas appeared earlier than the pin. |
+| STL | The solid view displayed a triangular face. Focusing the Wireframe radio and pressing Space selected it. Automated pointer selection did not complete within 2.5 s. On the initial narrow trial, GitHub's overlay intercepted pointer events. |
+
+These 32 viewer observations concern the pinned repository files. Held-out
+reader tasks, other GitHub surfaces and physical touch interaction remain open.
+
+### Explicit desktop edit
 
 Codex desktop 26.1111.2228.0 on Windows explicitly used GitHub Markdown Studio
 in maintainer mode with the [first-run fixture](../evals/first-run-guide.json)
@@ -98,6 +118,6 @@ The browser review is a local development check, not part of the bundled regress
 
 ## Outstanding checks after the dated runs
 
-The Windows entries above cover installation, explicit host use and the GitHub showcase in two themes. Project-only discovery, interactive diagram contents, remote link availability, host image generation, native review of additional languages and comparative agent benchmarks remain open.
+The Windows entries above cover installation, explicit host use and the four live diagram viewers in two themes. Project-only discovery, remote link availability, host image generation, native review of additional languages and comparative agent benchmarks remain open.
 
 The Arabic renderer test is a structural smoke test, not native linguistic or visual approval. English and Thai examples were reviewed as authored content, not certified by an independent translation reviewer.

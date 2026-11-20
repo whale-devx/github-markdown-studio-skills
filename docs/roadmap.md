@@ -34,7 +34,8 @@
 - [x] Check the live bilingual showcase at two widths with both color preferences.
 - [x] Cover exact output bytes and Windows locale handling in regression tests.
 - [ ] Repeat the edit task with working CLI credentials and isolate project-only discovery.
-- [ ] Inspect the interactive diagram contents and run held-out reader tasks before a stable release.
+- [x] Inspect the four interactive diagram viewers in the English and Thai repository showcase at two widths and in both themes.
+- [ ] Run held-out reader tasks before a stable release.
 
 See the [validation record](validation.md) for host versions, scope and reproduction steps.
 
