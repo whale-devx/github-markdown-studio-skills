@@ -5,15 +5,14 @@ deciding whether a place is blank. A quoted comma belongs to the place name.
 A trailing comma supplies an empty string. A row that ends after the ID
 has no place field.
 
-| CSV row | Parsed `place` | Extra fields | Import decision |
-| --- | --- | --- | --- |
-| `A1,"North, Bay"` | `'North, Bay'` | `[]` | Keep the full name |
-| `B2,` | `''` | `[]` | Apply the importer's blank-value policy |
-| `C3` | `None` | `[]` | Request the missing field |
-| `D4,West,annex,upper` | `'West'` | `['annex', 'upper']` | Hold the row for column mapping |
+| CSV row | Import decision |
+| --- | --- |
+| `A1,"North, Bay"` | Keep `'North, Bay'` as one place. |
+| `B2,` | Apply the blank-value policy to `''`. |
+| `C3` | Request the missing field. Its value is `None`. |
+| `D4,West,annex,upper` | Hold for mapping. The place is `'West'`. The extras are `'annex'` and `'upper'`. |
 
-The decisions in the last column are this importer's policy. Python exposes
-the field values and leaves those decisions to the caller.
+These decisions belong to the importer. Python supplies the field values.
 
 <details>
 <summary>Copy the four rows into records.csv</summary>

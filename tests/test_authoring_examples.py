@@ -43,10 +43,14 @@ class TransformationExamples(unittest.TestCase):
         lines = sample.splitlines()
         self.assertEqual(lines[0], "id,place")
         reader = csv.DictReader(lines, restkey="_extra", restval=None)
+        entries = [line.strip("|").split("|") for line in text.splitlines() if line.startswith("| `")]
         outputs = []
-        for line, row in zip(lines[1:], reader, strict=True):
+        for line, row, (source, decision) in zip(lines[1:], reader, entries, strict=True):
             place, extra = repr(row["place"]), row.get("_extra", [])
-            self.assertIn(f"| `{line}` | `{place}` | `{extra}` |", text)
+            self.assertEqual(source.strip(), f"`{line}`")
+            self.assertIn(f"`{place}`", decision)
+            for value in extra:
+                self.assertIn(f"`{value!r}`", decision)
             outputs.append(f"{row['id']} {place} {extra}")
         self.assertEqual(outputs, ["A1 'North, Bay' []", "B2 '' []", "C3 None []", "D4 'West' ['annex', 'upper']"])
         with tempfile.TemporaryDirectory() as directory:
