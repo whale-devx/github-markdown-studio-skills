@@ -1,3 +1,5 @@
+[Installation for Codex, Claude Code, Cursor, Gemini CLI, Kiro and API clients](docs/PORTABILITY.md)
+
 # GitHub Markdown Studio
 
 **One skill. Every Markdown document. Evidence first.**
