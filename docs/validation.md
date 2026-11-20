@@ -80,6 +80,30 @@ were outside the disclosure. These observations cover the GitHub repository
 file view. Independent reader outcomes and screen-reader and touch interaction
 remain unmeasured. [Rendered runbook](https://github.com/whale-devx/github-markdown-studio-skills/blob/af401f3ebb00727ce6e8b9c65c516dfc30dada6d/evals/authoring/sqlite-recovery.md)
 
+### Replay the Mermaid diagrams
+
+The [renderer check](../evals/render_mermaid.py) reads the Mermaid fences directly
+from the architecture page and the English and Thai showcases. From the repository
+root, install the audit dependencies described in [Contributing](../CONTRIBUTING.md),
+then preload the pinned [Mermaid CLI image](https://github.com/mermaid-js/mermaid-cli).
+
+```sh
+podman pull ghcr.io/mermaid-js/mermaid-cli/mermaid-cli@sha256:18938e53497376d524e04b1fc0bf7b6d61a491ce9ff7032bb2855d57155acb10
+python evals/render_mermaid.py
+```
+
+The check streams one fence into each disconnected container. It checks the exported
+SVG for node labels, directed edges, and a linked accessible title and description
+matching the source. It runs the default and dark themes. Docker users can pull the
+same digest with Docker and pass `--engine docker` to the script.
+
+On 2026-11-21 the original three exports had nodes and arrows but lacked both
+accessible text references. After adding localized descriptions, all six exports
+passed on Linux amd64 under Podman. The architecture diagram had 11 nodes and 12
+arrows. Each showcase had three nodes and two arrows. The image reported Mermaid
+CLI 12.0.0, Mermaid 12.2.0 and Chromium 156.0.8078.79. Screen reader behavior
+still needs a separate trial.
+
 ### Live diagram viewers in the English and Thai showcase
 
 On 2026-11-21 a signed-out Edge 157.0.4341.60 session opened the

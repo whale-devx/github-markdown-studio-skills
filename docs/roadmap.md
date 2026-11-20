@@ -48,7 +48,7 @@ See the [validation record](validation.md) for host versions, scope and reproduc
 - [ ] Run host image generation/editing end to end with a real image tool.
 - [ ] Extend language review beyond English and Thai, including native RTL review.
 - [ ] Add a documented external-link checker with explicit network controls.
-- [ ] Add optional Mermaid rendering checks against a recorded version.
+- [x] Replay the architecture and both localized Mermaid examples in two themes with a pinned renderer. [Command and results](validation.md#replay-the-mermaid-diagrams)
 
 ## Comparative quality
 

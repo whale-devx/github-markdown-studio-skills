@@ -29,6 +29,12 @@ Use fenced code with an appropriate language identifier; syntax coloring does no
 
 ## Diagrams
 
+Give a Mermaid diagram an `accTitle` that names it and an `accDescr` that explains the
+relationship or decision it shows. Translate both along with the node labels. In the
+rendered SVG, check that `aria-labelledby` and `aria-describedby` refer to the matching
+title and description. Keep the essential sequence in the surrounding document for
+readers who cannot open the viewer. [Mermaid accessibility options](https://mermaid.js.org/config/accessibility.html)
+
 GitHub documents four native fenced formats: `mermaid`, `geojson`, `topojson`, and ASCII `stl`. Select by the information, not decoration. Mermaid fits relationships; GeoJSON/TopoJSON fit real geospatial data; STL fits a relevant 3D mesh. Preserve text explanations and label synthetic data. Check GitHub's Mermaid version with a separate `mermaid` block containing `info` before using version-sensitive syntax. [GitHub diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
 
 The helper checks map JSON and selected **top-level** members only; it does not validate nested geometry, coordinates, topology, arc references or geographic truth. GeoJSON positions use longitude before latitude; do not swap them when translating. TopoJSON is not simply a GeoJSON object renamed to `Topology`. STL checks only solid/facet/vertex boundary counts, not numbers, normals, closed surfaces, units or mesh quality. These remain manual/specialist checks. [GeoJSON specification](https://www.rfc-editor.org/rfc/rfc7946.html) · [TopoJSON specification](https://github.com/topojson/topojson-specification)

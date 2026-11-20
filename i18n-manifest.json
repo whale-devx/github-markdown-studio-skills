@@ -13,8 +13,8 @@
       "source": "examples/advanced-formatting.en.md",
       "target": "examples/advanced-formatting.th.md",
       "language": "th",
-      "source_sha256": "29d4450e7cf4935afd0d00612cc78f70aa1df49936651297ff702fe66365fdd2",
-      "target_sha256": "2b7fa7cf434ccafaba5e11c3d4889aa230d456e92ca5ef4488e32529595e5f1b"
+      "source_sha256": "5ebe98c652272be5c45e15112e639bf962dad490351b2d45e60d7a51e7aa9076",
+      "target_sha256": "65f43c16b37351283079791a5edea1f2a2e2c3d1fc4a2e0ab638318f2ca2d64f"
     }
   ]
 }

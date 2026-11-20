@@ -58,6 +58,8 @@ Read the evidence, choose a format, then check and report the result. Both maps 
 
 ```mermaid
 flowchart LR
+  accTitle: Choosing a diagram
+  accDescr: Read the evidence, choose a format, then check the result and report what you verified.
   A[Read evidence] --> B[Choose format]
   B --> C[Check and report]
 ```
