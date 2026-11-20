@@ -335,6 +335,9 @@ class RenderTests(unittest.TestCase):
 
 
 class ProviderPortabilityTests(unittest.TestCase):
+    def test_standalone_skill_includes_repository_license(self):
+        self.assertEqual((SCRIPTS.parent / "LICENSE").read_bytes(), (ROOT / "LICENSE").read_bytes())
+
     """Preflight is a policy check, not a claim to have invoked real agents."""
 
     def profile(self, agent=None, **overrides):
