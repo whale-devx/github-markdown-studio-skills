@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "workflow",
+  "locales": {
+    "en": {
+      "direction": "ltr",
+      "title": "Make documentation easier to understand",
+      "summary": "One skill. Every Markdown document. Evidence first.",
+      "steps": [
+        {"title": "Understand the source", "detail": "Read the code, document purpose and audience."},
+        {"title": "Explain with the right visual", "detail": "Choose clear text, a diagram or an illustration."},
+        {"title": "Adapt theme and language", "detail": "Keep meaning and composition across variants."},
+        {"title": "Verify and report", "detail": "Separate checked facts from untested assumptions."}
+      ]
+    },
+    "th": {
+      "direction": "ltr",
+      "title": "ทำเอกสารให้เข้าใจง่ายขึ้น",
+      "summary": "สกิลเดียว ดูแลทุก Markdown โดยเริ่มจากหลักฐาน",
+      "steps": [
+        {"title": "เข้าใจข้อมูลต้นทาง", "detail": "อ่านโค้ด เป้าหมายเอกสาร และกลุ่มผู้อ่าน"},
+        {"title": "เลือกภาพช่วยอธิบาย", "detail": "เลือกข้อความ แผนภาพ หรือภาพประกอบให้ตรงงาน"},
+        {"title": "ปรับธีมและภาษา", "detail": "รักษาความหมายและองค์ประกอบให้ตรงกันทุกแบบ"},
+        {"title": "ตรวจสอบและรายงาน", "detail": "แยกสิ่งที่ตรวจแล้วออกจากสิ่งที่ยังไม่ได้ทดสอบ"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "source_language": "en",
+  "translations": [
+    {
+      "source": "README.md",
+      "target": "README.th.md",
+      "language": "th",
+      "source_sha256": "f69c42280b18846452b9a5caa4f9ec1312b87de9456a447a611d2bbca956296a",
+      "target_sha256": "df62806b7424823539ccb6ddf5f53e15742fca8cb6658328e281690a7932ab39"
+    }
+  ]
+}
