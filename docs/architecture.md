@@ -45,6 +45,12 @@ The skill contains no LLM SDK or provider-specific execution branch. An Agent Sk
 
 Image generation, image editing, browser screenshots and live GitHub checks must be confirmed separately. Offline SVG and Mermaid are deliberate alternatives, never mislabeled AI imagery. See the [portability reference](../skills/github-markdown-studio/references/agent-portability.md).
 
+## Advanced-formatting layer
+
+`audit.py` loads the exact sibling `advanced_formatting.py` and passes parsed tokens, source lines, a diagnostic callback and declared surface/PR context. It does not import code from the audited repository. The additive layer has no model or network dependency. Formatting instructions and transformations cover the ten official topics; a JSON inventory connects each topic to sources, bilingual examples, automated rules and required human checks.
+
+Surface warnings distinguish repository links from conversation features. Partial map, math and mesh checks are not renderer emulation. A small reference-rule guard prevents one-word footnote definitions from becoming false local links; footnote handling is deliberately not a full grammar implementation.
+
 ## Trust boundary
 
 The audit root is the local file boundary. The helper does not follow paths outside it, execute repository commands, fetch remote images or contact links. Common build/dependency directories are excluded from directory scans. It is not an operating-system sandbox and should not run with elevated privileges on a hostile changing filesystem.

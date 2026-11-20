@@ -66,6 +66,14 @@ python skills/github-markdown-studio/scripts/capability_plan.py --input examples
 
 ภาษาอื่นใช้ขั้นตอนเดียวกันได้ แต่ยังไม่ได้ตรวจคุณภาพภาษาและการแสดงผลครบทุกภาษา เครื่องมือที่ให้มาไม่แปลข้อความอัตโนมัติ ไม่รันคำสั่งเริ่มใช้งาน ไม่ติดต่อ URL ภายนอก ไม่เรนเดอร์ Mermaid และไม่รับรองผลการแสดงบน GitHub จริง
 
+## รูปแบบขั้นสูง ไม่จำกัดเฉพาะ README
+
+มีคู่มืออ้างอิงจากต้นทาง ตัวอย่างอังกฤษ–ไทย และขอบเขตการตรวจสำหรับทั้งสิบหัวข้อในหมวด advanced formatting ของ GitHub ได้แก่ ตาราง ส่วนพับได้ บล็อกโค้ด แผนภาพ คณิตศาสตร์ autolinks ไฟล์แนบ รายการงาน ลิงก์โค้ดถาวร และคำสำคัญที่มีผลต่อ workflow โดยแผนภาพครอบคลุม **Mermaid, GeoJSON, TopoJSON และ ASCII STL** ไม่ใช่เฉพาะ Mermaid
+
+ตัวตรวจแยกไฟล์ repository ออกจากข้อความบทสนทนาและ workflow ด้วย `--surface` และ `--pr-target` ตรวจโครงสร้างเฉพาะที่ระบุไว้ ไม่ใช่การตรวจทุก grammar หรือการแสดงผลจริง ส่วนเพิ่มเติมนี้ไม่ต้องใช้ SDK ของ provider ไม่แยกสกิลตามโมเดล ไม่เรียกบริการสร้างภาพ และไม่เพิ่มแพ็กเกจใหม่
+
+[คู่มือรูปแบบ](skills/github-markdown-studio/references/advanced-formatting.md) · [ตัวอย่างอังกฤษ](examples/advanced-formatting.en.md) · [ตัวอย่างไทย](examples/advanced-formatting.th.md) · [หัวข้อและข้อจำกัด](skills/github-markdown-studio/assets/formatting-coverage.json)
+
 ## ขั้นตอนการทำงาน
 
 <picture>

@@ -47,6 +47,19 @@ python skills/github-markdown-studio/scripts/capability_plan.py --input examples
 
 All returned tasks have `execution: not-run`; `ready` is a declared prerequisite check only. `false` blocks a required capability and omitted/null values stay unverified. Never invent an image, browser check or execution result to satisfy a missing tool. Python is unnecessary for the skill's general writing instructions; if no Python runtime is available, skip this helper entirely.
 
+## Advanced formatting and target surfaces
+
+Read the [formatting guide](../skills/github-markdown-studio/references/advanced-formatting.md), [transformation patterns](../skills/github-markdown-studio/references/formatting-patterns.md) and [English](../examples/advanced-formatting.en.md)/[Thai](../examples/advanced-formatting.th.md) examples. Every topic has known automated/manual boundaries in the [coverage inventory](../skills/github-markdown-studio/assets/formatting-coverage.json).
+
+```bash
+python skills/github-markdown-studio/scripts/audit.py . examples/advanced-formatting.en.md --surface repository --strict
+python skills/github-markdown-studio/scripts/audit.py . path/to/pr-body.md --surface pull-request --pr-target default --json
+```
+
+The second command illustrates a user-provided PR-body file, not one shipped here. `--pr-target default` must reflect an actual check, not an assumption. The helper never contacts GitHub, uploads attachments, creates sub-issues or closes issues. Default destination is `repository`; choices also include `issue`, `pull-request`, `discussion`, `wiki`, `comment`, and `commit-message`. Relative links outside repository documents are marked for surface review rather than incorrectly resolved against local files.
+
+Warnings are conservative authoring diagnostics, not a full grammar verdict. Map checks inspect JSON and selected top-level members only. STL checks boundary counts only. Math checks selected delimiters, not equations or TeX macros. Footnote definitions are kept as prose rather than mistaken for link URLs; full multi-block footnote grammar is not implemented. Unsupported rendering and workflow verification always remain `not-run`. No new package or model API is required.
+
 ## Run the audit helper
 
 From this repository's root:

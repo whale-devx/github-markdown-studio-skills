@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -16,14 +17,31 @@ from urllib.parse import unquote, urlsplit
 
 try:
     from markdown_it import MarkdownIt
+    from markdown_it.rules_block import reference as reference_rule
     import yaml
 except ImportError:
     raise SystemExit("Install audit dependencies: python -m pip install -r <skill>/scripts/requirements.txt")
 
+# Load our exact sibling, not a similarly named module in the target repository.
+_spec = importlib.util.spec_from_file_location("studio_advanced", Path(__file__).with_name("advanced_formatting.py"))
+advanced = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(advanced)
+
 MAX_BYTES = 2 * 1024 * 1024
 EXCLUDED = {".git", ".venv", "venv", "node_modules", "vendor", "dist", "build", "__pycache__"}
 LOCALE = re.compile(r"[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*\Z")
+def reference_without_footnotes(state, start_line, end_line, silent):
+    # CommonMark would mistake a one-word footnote definition for a link URL.
+    # Keep it as prose for the audit; this does not implement footnote rendering.
+    start = state.bMarks[start_line] + state.tShift[start_line]
+    first = state.src[start:state.eMarks[start_line]]
+    if re.match(r"\[\^[^\]\n]+\]:", first):
+        return False
+    return reference_rule(state, start_line, end_line, silent)
+
+
 PARSER = MarkdownIt("commonmark").enable(["table", "strikethrough"])
+PARSER.block.ruler.at("reference", reference_without_footnotes)
 
 
 @dataclass
@@ -164,7 +182,10 @@ class HTMLChecks(HTMLParser):
 
 
 class Auditor:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, surface: str = "repository", pr_target: str = "unknown"):
+        if surface not in advanced.SURFACES or pr_target not in advanced.TARGETS:
+            raise ValueError("Invalid rendering surface or pull-request target")
+        self.surface, self.pr_target = surface, pr_target
         self.root = root.resolve()
         self.findings: list[Finding] = []
         self.documents: dict[Path, tuple[list, set[str]]] = {}
@@ -227,6 +248,9 @@ class Auditor:
             raw = unquote(parsed.path)
             if "\x00" in raw or "\\" in raw:
                 raise ValueError("Invalid local URL path")
+            if self.surface != "repository":
+                self.add(source, "warning", "RELATIVE_SURFACE_REVIEW", line, "Relative URLs outside repository files need actual-surface review; local filesystem resolution is not equivalent.")
+                return
             base = self.root if raw.startswith("/") else source.parent
             target = contained(self.root, base / raw.lstrip("/")) if raw else source
             if not target.exists():
@@ -273,6 +297,7 @@ class Auditor:
                 elif child.type == "html_inline":
                     html.fragment(child.content, line)
         html.finish()
+        advanced.check(text, tokens, lambda severity, code, line, message: self.add(path, severity, code, line, message), self.surface, self.pr_target)
         for url, line in references:
             self.check_link(path, url, line)
 
@@ -329,13 +354,15 @@ class Auditor:
             self.check_translations(self.root / manifest)
         counts = {level: sum(f.severity == level for f in self.findings) for level in ("error", "warning")}
         return {
-            "version": 1, "files_checked": self.checked, "counts": counts,
+            "version": 1, "surface": self.surface, "pr_target": self.pr_target, "files_checked": self.checked, "counts": counts,
             "findings": [asdict(f) for f in self.findings],
             "verification": {
                 "local_static_checks": "fail" if counts["error"] else "pass",
                 "translation_hashes": "checked" if manifest else "not-run",
                 "translation_semantics": "not-run", "external_links": "not-run",
                 "github_render": "not-run", "visual_accessibility": "not-run",
+                "advanced_structure": "checked", "math_render": "not-run",
+                "map_render": "not-run", "stl_render": "not-run", "workflow_effects": "not-run",
                 "mermaid_render": "not-run", "quick_start_execution": "not-run",
             },
             "external_references_skipped": self.external_links,
@@ -347,19 +374,21 @@ def main() -> int:
     parser.add_argument("root", type=Path, help="Repository boundary; never read linked files outside it")
     parser.add_argument("paths", nargs="*", help="Files/directories relative to root (default: entire repository)")
     parser.add_argument("--translations", help="Root-relative JSON translation manifest")
+    parser.add_argument("--surface", choices=advanced.SURFACES, default="repository", help="Rendering destination, not inferred from a filename")
+    parser.add_argument("--pr-target", choices=advanced.TARGETS, default="unknown", help="Declared PR target; not verified against GitHub")
     parser.add_argument("--json", action="store_true", help="Write a JSON report to stdout")
     parser.add_argument("--strict", action="store_true", help="Return exit 1 for warnings as well as errors")
     args = parser.parse_args()
     if not args.root.is_dir():
         parser.error("root must be an existing directory")
-    report = Auditor(args.root).run(args.paths, args.translations)
+    report = Auditor(args.root, args.surface, args.pr_target).run(args.paths, args.translations)
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         for item in report["findings"]:
             print(f'{item["path"]}:{item["line"]}: {item["severity"]} {item["code"]}: {item["message"]}')
         print(f'{report["files_checked"]} files; {report["counts"]["error"]} errors; {report["counts"]["warning"]} warnings')
-        print("Not run: remote links, GitHub rendering, visual/accessibility review, translation semantics, Mermaid rendering, quick-start execution.")
+        print("Not run: remote links, GitHub rendering, visual/accessibility review, translation semantics, Mermaid/math/map/STL rendering, workflow effects, quick-start execution.")
     return int(bool(report["counts"]["error"] or (args.strict and report["counts"]["warning"])))
 
 

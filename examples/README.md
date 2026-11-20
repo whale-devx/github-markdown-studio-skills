@@ -1,5 +1,7 @@
 # Visual examples
 
+See also the [advanced-formatting showcase in English](advanced-formatting.en.md) and [ภาษาไทย](advanced-formatting.th.md), covering all ten official topics and related formatting. These are fixtures, not proof of GitHub rendering.
+
 [Home](../README.md)
 
 ## English: matching themes
