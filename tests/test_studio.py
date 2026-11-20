@@ -26,6 +26,7 @@ def load(name):
 
 audit = load("audit")
 render = load("render_diagram")
+capability_plan = load("capability_plan")
 
 
 class AuditTests(unittest.TestCase):
@@ -314,6 +315,115 @@ class RenderTests(unittest.TestCase):
                 values = sorted([luminance(palette[foreground]), luminance(palette[background])])
                 self.assertGreaterEqual((values[1] + 0.05) / (values[0] + 0.05), 4.5)
 
+
+
+class ProviderPortabilityTests(unittest.TestCase):
+    """Preflight is a policy check, not a claim to have invoked real agents."""
+
+    def profile(self, agent=None, **overrides):
+        capabilities = {key: None for key in capability_plan.CAPABILITIES}
+        capabilities.update(overrides)
+        return {
+            "agent": agent,
+            "capabilities": capabilities,
+            "tasks": [
+                "static_audit", "edit_markdown", "mermaid_diagram", "svg_diagram",
+                "ai_illustration", "paired_ai_illustration", "dark_light_assets",
+                "multilingual_draft", "local_preview", "github_preview",
+            ],
+        }
+
+    def task(self, report, name):
+        return next(row for row in report["tasks"] if row["task"] == name)
+
+    def test_same_capabilities_are_provider_invariant(self):
+        p = self.profile(read_files=True, write_files=True, run_commands=True, python=True)
+        outputs = []
+        for agent in ("codex", "claude-code", "gemini-cli", "cursor", "opencode", "unknown-agent"):
+            p["agent"] = agent
+            outputs.append(capability_plan.plan(p)["tasks"])
+        self.assertTrue(all(value == outputs[0] for value in outputs))
+
+    def test_unprovided_capabilities_are_unknown(self):
+        p = self.profile()
+        self.assertIsNone(capability_plan.plan(p)["capabilities"]["image_generate"])
+        self.assertEqual(self.task(capability_plan.plan(p), "ai_illustration")["status"], "unverified")
+
+    def test_all_true_uses_host_capabilities(self):
+        p = self.profile(**{key: True for key in capability_plan.CAPABILITIES})
+        result = capability_plan.plan(p)
+        self.assertEqual(self.task(result, "ai_illustration")["method"], "host-image-generation")
+        self.assertEqual(self.task(result, "paired_ai_illustration")["status"], "ready")
+        self.assertEqual(self.task(result, "github_preview")["status"], "ready")
+        self.assertEqual(self.task(result, "multilingual_draft")["status"], "review-required")
+        self.assertTrue(all(row["execution"] == "not-run" for row in result["tasks"]))
+
+    def test_declared_absent_ai_tool_not_faked(self):
+        p = self.profile(read_files=True, write_files=True, image_generate=False, run_commands=True, python=True)
+        result = capability_plan.plan(p)
+        self.assertEqual(self.task(result, "ai_illustration")["status"], "blocked")
+        self.assertEqual(self.task(result, "dark_light_assets")["method"], "offline-deterministic-svg")
+
+    def test_no_image_edit_blocks_consistent_ai_pair(self):
+        result = capability_plan.plan(self.profile(write_files=True, image_generate=True, image_edit=False))
+        self.assertEqual(self.task(result, "ai_illustration")["status"], "ready")
+        self.assertEqual(self.task(result, "paired_ai_illustration")["status"], "blocked")
+
+    def test_mermaid_without_python(self):
+        result = capability_plan.plan(self.profile(write_files=True, python=False, run_commands=False))
+        self.assertEqual(self.task(result, "mermaid_diagram")["status"], "ready")
+        self.assertEqual(self.task(result, "svg_diagram")["status"], "fallback")
+        self.assertEqual(self.task(result, "svg_diagram")["method"], "github-mermaid-code-block")
+
+    def test_no_file_write_cannot_edit(self):
+        result = capability_plan.plan(self.profile(read_files=True, write_files=False))
+        self.assertEqual(self.task(result, "edit_markdown")["status"], "blocked")
+        self.assertEqual(self.task(result, "mermaid_diagram")["status"], "blocked")
+
+    def test_no_python_static_audit_fallback(self):
+        result = capability_plan.plan(self.profile(read_files=True, python=False))
+        self.assertEqual(self.task(result, "static_audit")["method"], "manual-readonly-review")
+
+    def test_browser_without_network_not_github_preview(self):
+        result = capability_plan.plan(self.profile(browser=True, network=False))
+        self.assertEqual(self.task(result, "local_preview")["status"], "ready")
+        self.assertEqual(self.task(result, "github_preview")["status"], "blocked")
+
+    def test_no_file_access_cannot_audit_repo(self):
+        result = capability_plan.plan(self.profile(read_files=False))
+        self.assertEqual(self.task(result, "static_audit")["status"], "blocked")
+
+    def test_unknown_fields_rejected(self):
+        with self.assertRaises(ValueError):
+            capability_plan.plan({"capabilities": {"vendor_specific_flag": True}, "tasks": ["static_audit"]})
+
+    def test_invalid_types_rejected(self):
+        with self.assertRaises(ValueError):
+            capability_plan.plan({"capabilities": {"browser": "yes"}, "tasks": ["github_preview"]})
+
+    def test_duplicate_tasks_rejected(self):
+        with self.assertRaises(ValueError):
+            capability_plan.plan({"capabilities": {}, "tasks": ["static_audit", "static_audit"]})
+
+    def test_cli_json_and_no_side_effects(self):
+        case = ROOT / "examples/host-capabilities.json"
+        before = case.read_bytes()
+        proc = subprocess.run([sys.executable, str(SCRIPTS / "capability_plan.py"), "--input", str(case)], capture_output=True, text=True, check=False)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        result = json.loads(proc.stdout)
+        self.assertEqual(self.task(result, "ai_illustration")["status"], "blocked")
+        self.assertEqual(case.read_bytes(), before)
+
+    def test_cli_bad_json_exit_two(self):
+        proc = subprocess.run([sys.executable, str(SCRIPTS / "capability_plan.py")], input="{unclosed", capture_output=True, text=True, check=False)
+        self.assertEqual(proc.returncode, 2)
+        self.assertIn("Capability preflight", proc.stderr)
+
+    def test_examples_are_stable_and_covered(self):
+        profile = json.loads((ROOT / "examples/host-capabilities.json").read_text())
+        report = capability_plan.plan(profile)
+        self.assertEqual(report["agent"], "example-host-do-not-assume-provider")
+        self.assertEqual(len(report["tasks"]), len(profile["tasks"]))
 
 if __name__ == "__main__":
     unittest.main()

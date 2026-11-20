@@ -7,7 +7,7 @@ English · [ไทย](README.th.md)
 Create, improve, audit and synchronize GitHub documentation—not just READMEs. Make guides, architecture notes, references and runbooks easier to understand with appropriate visuals, matching light/dark assets, and deliberate multilingual workflows.
 
 > [!IMPORTANT]
-> **v0.1.0 is an initial implementation, not a benchmark winner.** The skill supplies agent instructions and tested offline helpers. AI illustration generation requires an image tool from the host agent; the bundled SVG generator is deterministic, not AI-generated imagery.
+> **This is an evolving implementation, not a benchmark winner or a universal agent certification.** The skill supplies agent instructions and tested offline helpers. AI illustration generation requires an image tool from the host agent; the bundled SVG generator is deterministic, not AI-generated imagery.
 
 ## Install
 
@@ -23,7 +23,21 @@ For a development checkout, install from the local repository directory instead:
 npx skills add . --skill github-markdown-studio
 ```
 
-Add `-g` to install at user scope, or `-a codex` to select that agent. The current Skills CLI documents Node.js 22.20+; consult its [installation reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md). Installation makes the instructions available; it does not add image-generation tools or browser access to your agent.
+Add `-g` to install at user scope, or `-a <agent-id>` to choose a supported agent. The current Skills CLI documents Node.js 22.20+; consult its [installation reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md). Installation makes the instructions available; it does not add image-generation tools or browser access to your agent.
+
+## Works across agent and model providers
+
+The skill is **provider-agnostic**: one standard `SKILL.md`, without a required model API, SDK, token, proprietary tool, or provider-specific fork. It can be installed through any compatible Agent Skills loader. The Skills CLI lists Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot, OpenCode, Windsurf, Cline, Roo Code and others; **CLI support does not mean this project has tested those agents end to end**. [See the portability contract](skills/github-markdown-studio/references/agent-portability.md).
+
+Always select behavior by the **tools actually available in the host** rather than the model name. Python, image generation, image editing, web access and a browser are optional. If an AI image is requested without an image tool, the result must say `blocked` rather than disguise an SVG or a prompt as generated imagery. Language drafts still require linguistic review.
+
+The offline preflight reads a deliberately provided capability inventory and recommends methods; it does not auto-detect hosts or execute the tasks:
+
+```bash
+python skills/github-markdown-studio/scripts/capability_plan.py --input examples/host-capabilities.json
+```
+
+Available methods, not successful outcomes, are reported. Native installation and activation in each provider remain separate integration tests.
 
 ## Ask for an outcome
 
@@ -48,6 +62,7 @@ For a non-editing review, ask for `audit`. The other modes are `create`, `improv
 | Explanatory visuals | Mermaid guidance, deterministic SVG generation and a capability-aware host image-generation workflow |
 | Verification | Read-only local checks, explicit untested states and regression tests |
 | Safe editing | Scope boundaries, preserved frontmatter, evidence requirements and no implicit publishing |
+| Cross-agent portability | Standard Agent Skills instructions and an optional capability-only preflight, with no model SDK |
 
 Other locales can follow the workflow, but are not all linguistically or visually tested. The helpers do not automatically translate prose, execute quick starts, contact remote links, render Mermaid or certify GitHub's actual output.
 
