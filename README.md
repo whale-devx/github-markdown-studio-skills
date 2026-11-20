@@ -11,6 +11,8 @@ Create, improve, audit and synchronize GitHub documentation—not just READMEs. 
 
 ## Install
 
+[Installation by agent and API client](docs/PORTABILITY.md)
+
 Install the skill from GitHub:
 
 ```bash
