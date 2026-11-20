@@ -14,6 +14,11 @@ The helper only performs bounded structural checks. **Mermaid, MathJax, map/STL 
 
 Use a header, delimiter row and data rows. Use `:---`, `:---:` and `---:` for alignment; escape literal `\|`, including inside inline code. Prefer short cells; split long procedures into sections instead of forcing block content into a table. The checker flags differing body-row cell counts, which may be padded or truncated by GFM, as a **review warning**, not necessarily invalid syntax. Header syntax and visual overflow still need review. [GitHub tables](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables) · [GFM](https://github.github.io/gfm/)
 
+On a narrow screen, check both the first column and the last cell. A long commit
+hash can make the table scroll while the rest of the page fits. Try reaching
+the table with Tab and scrolling it with the arrow keys. Put any conclusion
+readers need before scrolling in the surrounding prose.
+
 ## Collapsed sections
 
 Use paired `<details>` tags with a descriptive `<summary>` and blank lines around inner Markdown. `open` expands by default. Do not hide the only install command, prerequisites, security warning or result. Audit missing/extra summaries and unmatched details; manually review summary wording, keyboard use and nested content. [GitHub collapsed sections](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections)
@@ -44,9 +49,9 @@ The checker finds extra `$$` wrappers in math fences and unmatched **standalone*
 
 ## Autolinked references
 
-Issue/PR shorthand such as `#123`, `GH-123` and `owner/repo#123` is a conversation feature: GitHub does not create these autolinked references in repository files or wikis. Use explicit Markdown links there. A full URL being clickable is not the same as shorthand expansion. Discussions in lists, commit SHAs, same-repository label URLs and configured custom autolinks have additional rules; verify them on the target surface. Do not invent issue IDs, SHAs or external-ticket configuration. [GitHub autolinks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls)
+Use explicit Markdown links for issues and PRs in repository files and wikis. In conversations, GitHub can turn shorthand such as `#123`, `GH-123` and `owner/repo#123` into links. A commit subject can also link a PR number. For example, the `#9` in this repository's merge commit opens the onboarding PR. Check the destination on the intended surface, especially for commit SHAs, labels and custom autolinks. [GitHub autolinks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls) · [Example commit](https://github.com/whale-devx/github-markdown-studio-skills/commit/f2232810ed65da3bbdc63041fa72fae5d3a4ba47)
 
-The helper warns about issue/PR shorthand outside conversations, ignoring code examples and already-linked labels. It does not verify remote references or custom settings. A legitimate literal reference may still warrant manual review, not automatic rewriting.
+The helper warns about unlinked shorthand on the `repository` and `wiki` surfaces. It skips inline code and already-linked labels. Follow the shorthand itself when checking its destination. An explicit URL exercises a different link. Use verified issue numbers, commit SHAs and external-ticket settings when rewriting a literal example.
 
 ## Attaching files
 

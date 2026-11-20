@@ -24,6 +24,50 @@ diagram into view. Inspect the viewer contents and controls inside each frame.
 These 32 viewer observations concern the pinned repository files. Held-out
 reader tasks, other GitHub surfaces and physical touch interaction remain open.
 
+### Issues, pull requests, comments and commit messages
+
+On 2026-11-21 (Bangkok), Playwright opened five existing public pages or
+comment anchors in signed-out Edge 157.0.4341.60. Each example was checked
+at 360 × 800 and 1280 × 800 CSS pixels with both light and dark preferences.
+The table records what a reader could reach from each example.
+
+| Source | What to check when repeating the trial |
+| --- | --- |
+| [Issue 10](https://github.com/whale-devx/github-markdown-studio-skills/issues/10) | The description had three section headings. Focusing the roadmap link and pressing Enter opened the repository's roadmap file. |
+| [PR 12 description](https://github.com/whale-devx/github-markdown-studio-skills/pull/12#issue-6518198188) | The verification list had four items. The inline code `f223281` stayed plain text. Enter on the linked issue number opened issue 10. |
+| [PR 3 verification table](https://github.com/whale-devx/github-markdown-studio-skills/pull/3#issue-6513051408) | Two headers and six data rows rendered. At 360 px the table had 195 px of horizontal scroll. Starting at the heading, Tab focused the table and Right Arrow scrolled it in both themes. Scrolling to the end revealed the full tree hash. At 1280 px the table fit. |
+| [PR 3 comment](https://github.com/whale-devx/github-markdown-studio-skills/pull/3#issuecomment-7041652793) | The two job names formed a list. The commit hash in inline code stayed plain text. Enter on the Quality run link opened run 44750747500 and its two-job summary. |
+| [Commit f223281](https://github.com/whale-devx/github-markdown-studio-skills/commit/f2232810ed65da3bbdc63041fa72fae5d3a4ba47) | In the merge subject, Enter on the linked PR number opened the onboarding PR. |
+
+The page width matched the viewport in all 20 cases. For a separate offline
+check, save each original body as UTF-8 and run `audit.py` with the matching
+`--surface`. Both PRs targeted `main`, so their checks also used
+`--pr-target default`. All five inputs returned zero findings.
+
+### Public Wiki and Discussion examples
+
+Discussions were disabled in this repository, and its public wiki URL
+redirected to the repository home. Two published upstream examples provided
+the same four signed-out theme and viewport combinations.
+
+- On the original GitHub CLI Discussion post, both command names were inline
+  code inside links. Enter on `gh api` opened the CLI manual with the matching
+  heading in all four cases. [Discussion 2618](https://github.com/cli/cli/discussions/2618)
+- On the pinned VS Code wiki page, the source links to the **current** page's
+  Node version heading. Enter opened that URL with the expected fragment in
+  all four cases. The heading existed, but it stayed below the viewport for
+  the five-second observation window, including after reload. Starting from
+  the current page also left the heading outside the viewport in all four
+  combinations. Check where the heading lands before reporting that a reader
+  can jump to it.
+  [Pinned wiki page](https://github.com/microsoft/vscode/wiki/How-to-Contribute/6217f0572bd6d5d101f393765f2d175a901bff16)
+
+The strict offline checks on the original Discussion body and wiki Markdown
+both returned zero findings. Together with the repository-file checks above,
+these trials cover examples on all seven named surfaces. The wiki jump remains
+a failed navigation check. Physical touch and actions that change issue state
+remain untested.
+
 ### Explicit desktop edit
 
 Codex desktop 26.1111.2228.0 on Windows explicitly used GitHub Markdown Studio

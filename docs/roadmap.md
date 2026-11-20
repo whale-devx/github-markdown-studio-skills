@@ -25,7 +25,8 @@
 - [x] Add surface-aware offline diagnostics and explicit manual/renderer limits.
 - [x] Add linked English/Thai examples, transformation patterns and source inventory.
 - [x] Add structural and false-positive regression tests without provider dependencies.
-- [ ] Run actual GitHub previews for each target surface, theme and viewport.
+- [x] Check linked destinations and narrow-screen table access on existing GitHub issues, pull requests, comments and a commit page in both themes.
+- [x] Inspect published wiki and Discussion examples in the same four theme and viewport combinations. The wiki link opened the page but missed the heading.
 - [ ] Run agent-level authoring/transformation evaluations against held-out projects.
 
 ## Beta readiness
