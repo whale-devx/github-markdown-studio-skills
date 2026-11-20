@@ -24,6 +24,14 @@ Use a table when readers compare the same attributes across options. Do not use 
 
 A visual must explain a relationship, decision, state, or workflow more clearly than its replacement text. Avoid adding stock imagery to API references or emergency runbooks merely to satisfy a visual quota.
 
+## Decide what to keep in an edit
+
+Consider a README with installation commands and a worked example showing how to adapt a guide for two languages and both themes.
+
+- If readers can install the skill but have to search for a first task, add a short prompt beside setup. The worked example still answers a different question about the scope of a real assignment.
+- If the reader asks for a shorter README, a repeated explanation of the editing modes can be cut where the surviving explanation is easy to find. Keep the distinctive part of the worked example, and keep prerequisites beside the command that needs them.
+- If only an installation argument is wrong, check the identifier against its source and correct that argument. Leave the surrounding introduction and example in place.
+
 ## Preserve the document set
 
 Respect canonical pages, existing document IDs and stable links. When splitting a long file, update inbound and outbound paths within the authorized scope. Report references outside the scope rather than silently rewriting unrelated files. A source path is evidence only after reading its relevant content.
