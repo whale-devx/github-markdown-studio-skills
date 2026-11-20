@@ -27,7 +27,8 @@
 - [x] Add structural and false-positive regression tests without provider dependencies.
 - [x] Check linked destinations and narrow-screen table access on existing GitHub issues, pull requests, comments and a commit page in both themes.
 - [x] Inspect published wiki and Discussion examples in the same four theme and viewport combinations. The wiki link opened the page but missed the heading.
-- [ ] Run agent-level authoring/transformation evaluations against held-out projects.
+- [x] Turn external ripgrep and uv manuals held out from skill development into a reference and a recovery runbook. [Authoring trial and replay](validation.md#external-project-authoring)
+- [ ] Evaluate advanced structures beyond code blocks and links on held-out projects.
 
 ## Beta readiness
 

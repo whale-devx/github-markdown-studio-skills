@@ -6,6 +6,45 @@ This record separates actual local checks from planned integration work. It is n
 
 ## Windows validation on 2026-11-21
 
+### External-project authoring
+
+A maintainer searching for a literal version and an operator repairing a
+Python environment need different documents. One Codex desktop session
+(26.1111.2228.0, Windows build 26200) explicitly used the skill to turn
+parts of the ripgrep 15.2.0 and uv 0.8.12 manuals into two GitHub repository
+pages. The [tasks and acceptance checks](../evals/authoring/protocol.md)
+were fixed locally before the source passages were opened. Neither project
+appeared in the skill's evaluation materials. Prior model familiarity with
+these public projects is unknown. Skills CLI 1.9.0 installed the local
+candidate at `9edf0e8` into a new Codex project. All 17 installed files
+matched the source after line-ending normalization.
+
+| Document | Observed outcome |
+| --- | --- |
+| [ripgrep reference](../evals/authoring/ripgrep-reference.md) | The default search returned one file. Including hidden files returned two. Both respected the ignore file and excluded the regex lookalike. The absent literal exited 1 with empty output. A missing path exited 2 and named the path on stderr. All five fixture files kept their hashes. |
+| [uv recovery runbook](../evals/authoring/uv-runbook.md) | The diagnostic identified the missing package. The offline repair installed the expected pip wheel in the named maintenance environment. Rollback removed it. The adjacent application environment still lacked pip, and all of its files kept their hashes after both operations. An empty wheel directory failed before installation. |
+
+Two deliberately edited copies showed why the commands matter. Dropping
+`-F` also matched `v2x0`. Omitting `--python .maintenance` made uv's
+install exit successfully while the maintenance environment still lacked
+pip. Both controls used disposable fixtures.
+
+To replay, have the two named tool versions on PATH and use a CPython
+installation with a pip wheel bundled in `ensurepip`. Run this command from
+the repository root.
+
+```sh
+python evals/authoring/replay.py
+```
+
+The [replay](../evals/authoring/replay.py) checks the fenced commands against
+the reviewed argument lists and runs those lists on temporary files and
+unactivated virtual environments. It uses the local wheel with networking
+disabled in uv. It passed on Python 3.12.8 with pip 24.3.1 and Python 3.14.0
+with pip 25.2. These results cover the documented commands on Windows.
+Independent reader outcomes, other hosts, comparative quality and inference
+cost were unmeasured.
+
 ### Live diagram viewers in the English and Thai showcase
 
 On 2026-11-21 a signed-out Edge 157.0.4341.60 session opened the
