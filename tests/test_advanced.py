@@ -205,6 +205,9 @@ class AdvancedTests(unittest.TestCase):
     def test_footnote_link_still_audited(self):
         self.assertIn("BROKEN_LOCAL_LINK", self.codes("Note[^r]\n\n[^r]: [Missing](missing.md)"))
 
+    def test_wiki_footnote_in_code_is_inert(self):
+        self.assertNotIn("FOOTNOTE_SURFACE", self.codes("Write `[^note]` in code.", "wiki"))
+
     def test_wiki_footnotes_warn(self):
         self.assertIn("FOOTNOTE_SURFACE", self.codes("Note[^r]\n\n[^r]: Details", "wiki"))
 
@@ -239,7 +242,7 @@ class AdvancedTests(unittest.TestCase):
 
 class CoverageTests(unittest.TestCase):
     def test_all_ten_topics_have_sources_examples_and_limits(self):
-        manifest = json.loads((ROOT / "skills/github-markdown-studio/assets/formatting-coverage.json").read_text())
+        manifest = json.loads((ROOT / "skills/github-markdown-studio/assets/formatting-coverage.json").read_text(encoding="utf-8"))
         ids = {t["id"] for t in manifest["topics"]}
         self.assertEqual(ids, {"tables","collapsed-sections","code-blocks","diagrams","mathematics","autolinks","attachments","task-lists","permalinks","keywords"})
         for topic in manifest["topics"]:
@@ -248,7 +251,7 @@ class CoverageTests(unittest.TestCase):
             self.assertTrue(topic["automated_rules"])
             for target in topic["examples"]:
                 path, anchor = target.split("#")
-                self.assertIn(f'<a name="{anchor}"></a>', (ROOT / path).read_text())
+                self.assertIn(f'<a name="{anchor}"></a>', (ROOT / path).read_text(encoding="utf-8"))
 
     def test_showcases_are_clean_with_four_diagram_types(self):
         for language in ("en", "th"):

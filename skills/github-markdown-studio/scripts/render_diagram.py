@@ -114,7 +114,7 @@ def write_assets(output: Path, assets: dict[str, str], force: bool = False) -> N
     with tempfile.TemporaryDirectory(dir=output) as temporary:
         staging = Path(temporary)
         for filename, content in assets.items():
-            (staging / filename).write_text(content, encoding="utf-8")
+            (staging / filename).write_bytes(content.encode("utf-8"))
         for filename in assets:
             (staging / filename).replace(output / filename)
 
