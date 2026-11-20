@@ -4,6 +4,8 @@
 
 Keep changes focused and evidence-backed. Preserve the original license. Do not add claimed benchmarks, agent compatibility, screenshots or test outcomes that have not been verified.
 
+For a security concern, follow the [private reporting instructions](SECURITY.md).
+
 ## Local validation
 
 Use Python 3.10+ in an isolated environment, install the audit requirements, then run:
