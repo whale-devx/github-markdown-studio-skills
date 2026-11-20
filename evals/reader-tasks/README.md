@@ -1,11 +1,12 @@
-# Reader tasks for references and runbooks
+# Reader tasks for guides, references and runbooks
 
-A facilitator can use these two tasks to see whether a reader can make a
-correct decision from the assigned document. Both use sources from projects
+A facilitator can use these tasks to see whether a reader can make a
+correct decision from the assigned document. They use sources from projects
 outside Markdown Studio. Independent reader trials are pending.
 
 | Task | Document to give the reader in a baseline trial | Participant packet |
 | --- | --- | --- |
+| Commit one revision and keep a later edit for tomorrow | [Git tutorial at `c44beea`](https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gittutorial.adoc) | [Two edits before a commit](guide.md) |
 | Interpret a saved model inventory | [Model Router discovery reference at `0ba1e90`](https://github.com/whale-devx/intelligent-model-router-skills/blob/0ba1e9045642b1ad8d65f6f5bdd91f8d40118b77/skills/intelligent-model-router/references/live-discovery.md) | [A saved inventory](reference.md) |
 | Recover from a release setup conflict | [Git FlowKit release guide at `a15e6e0`](https://github.com/whale-devx/git-flowkit-skills/blob/a15e6e024d39c93592f655d5a903c15342d5c45f/skills/git-flowkit/references/releases.md) | [Release setup during a handover](runbook.md) |
 

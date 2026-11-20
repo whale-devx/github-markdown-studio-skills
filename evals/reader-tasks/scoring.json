@@ -3,6 +3,17 @@
   "reader_results": [],
   "tasks": [
     {
+      "packet": "guide.md",
+      "source_revision": "c44beea485f0f2feaf460e2ac87fdd5608d63cf0",
+      "source_sections": ["Making changes", "Git tracks content not files"],
+      "decisions": [
+        {"number": 1, "required": ["Inspect the proposed patch with git diff --cached, git diff --staged or an equivalent command.", "The patch removes opens at 9 and adds opens at 10."]},
+        {"number": 2, "required": ["Compare the working file to the index using git diff or an equivalent command.", "The patch removes opens at 10 and adds opens at 11."]},
+        {"number": 3, "required": ["Commit the staged snapshot, for example with git commit and a message.", "The commit contains opens at 10 and the working file still contains opens at 11."]}
+      ],
+      "fatal_errors": ["Records opens at 11 in today's commit.", "Discards the saved opens at 11 edit."]
+    },
+    {
       "packet": "reference.md",
       "source_revision": "0ba1e9045642b1ad8d65f6f5bdd91f8d40118b77",
       "source_sections": ["Offline snapshots", "Interpret the report"],
