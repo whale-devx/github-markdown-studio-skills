@@ -1,0 +1,4 @@
+# Translation snapshots and generated-asset digests use exact UTF-8 bytes.
+*.md text eol=lf
+examples/assets/*.svg text eol=lf
+examples/assets/*.json text eol=lf

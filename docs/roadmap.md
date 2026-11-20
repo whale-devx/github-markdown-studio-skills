@@ -28,6 +28,16 @@
 - [ ] Run actual GitHub previews for each target surface, theme and viewport.
 - [ ] Run agent-level authoring/transformation evaluations against held-out projects.
 
+## Beta readiness
+
+- [x] Exercise an explicitly invoked read-only task on a real CLI host and record its trace.
+- [x] Check the live bilingual showcase at two widths with both color preferences.
+- [x] Cover exact output bytes and Windows locale handling in regression tests.
+- [ ] Repeat the edit task with working CLI credentials and isolate project-only discovery.
+- [ ] Inspect the interactive diagram contents and run held-out reader tasks before a stable release.
+
+See the [validation record](validation.md) for host versions, scope and reproduction steps.
+
 ## Next validation work
 
 - [ ] Exercise actual skill installation and invocation in selected supported agents.

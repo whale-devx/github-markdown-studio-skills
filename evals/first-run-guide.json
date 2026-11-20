@@ -1,0 +1,19 @@
+{
+  "scenario": "guide-not-readme",
+  "files": {
+    "guide.md": "Prerequisite: Python 3.10+. Run `python hello.py`.\n",
+    "hello.py": "print(\"Ready\")\n"
+  },
+  "trials": [
+    {
+      "mode": "audit",
+      "request": "Use github-markdown-studio to audit guide.md against hello.py. Report the missing expected output. Read only.",
+      "pass": ["Reports Ready as the missing expected output", "Both input files are unchanged"]
+    },
+    {
+      "mode": "improve",
+      "request": "Use github-markdown-studio to improve guide.md. Add the expected output from hello.py and preserve the prerequisite and command.",
+      "pass": ["Only guide.md changes", "Python 3.10+ and python hello.py remain", "Expected output is Ready", "No additional setup or promotional sections"]
+    }
+  ]
+}

@@ -193,7 +193,7 @@ def check(text, tokens, add, surface="repository", pr_target="unknown"):
                 add("warning", "ALERT_TYPE", line, "Use NOTE, TIP, IMPORTANT, WARNING or CAUTION.")
             if token.level > 2 or details.stack:
                 add("warning", "ALERT_NESTED", line, "GitHub alerts cannot be nested inside other elements.")
-        if surface == "wiki" and re.search(r"\[\^[^\]]+\]", token.content):
+        if surface == "wiki" and re.search(r"\[\^[^\]]+\]", content):
             add("warning", "FOOTNOTE_SURFACE", line, "Footnotes are not supported in GitHub wikis; use ordinary links.")
         for index, raw in enumerate(token.content.splitlines()):
             # Only an exact standalone $$ line; do not guess whether currency is math.

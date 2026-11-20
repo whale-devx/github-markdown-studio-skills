@@ -4,6 +4,28 @@
 
 This record separates actual local checks from planned integration work. It is not an agent benchmark or a claim of universal GitHub compatibility.
 
+## Windows beta-readiness check (2026-11-20)
+
+The starting revision was `785bf30`. On Windows with Python 3.12, the original 131-test suite had three errors: one locale-dependent read of a Thai fixture and two attempts to create symlinks without the Windows privilege. After the fixes, 133 tests ran, 131 passed and only the two privilege-dependent cases skipped locally. SVG regeneration matched the tracked assets byte for byte. The new on-disk digest test covers Windows newline conversion.
+
+### Fresh project installation and runtime
+
+In a temporary Git repository, Skills CLI 1.9.0 installed the checkout with `npx skills add <checkout> --skill github-markdown-studio -a codex -a claude-code -a github-copilot -y`. It reported universal installation for Codex and GitHub Copilot and a link for Claude Code. Each client received the same skill. A user-level copy was also present, so the successful invocation does not isolate project discovery from global discovery.
+
+| Windows host | Explicit invocation and file access | Result |
+| --- | --- | --- |
+| GitHub Copilot CLI 1.0.44 | The trace showed skill activation and reads of both fixture files. It identified the missing output as `Ready`. The read-only run reported zero edits. | Audit passed. A subsequent edit run was blocked during model credential lookup. |
+| Codex CLI 0.164.0 | Both model requests were rejected by the account before the guide task ran. | Fresh CLI execution blocked. The earlier explicit Codex desktop use is recorded below. |
+| Claude Code 2.1.161 | The client returned HTTP 401 for expired OAuth credentials before the task ran. | Runtime blocked. |
+
+To reproduce the audit, create `hello.py` containing `print("Ready")` and a one-line guide containing “Prerequisite: Python 3.10+. Run `python hello.py`.” Ask the client to use the skill to audit the guide against the script and report the missing expected output. Check the activation trace, the answer and the unchanged files. For the edit trial, request the expected output in the guide and verify the prerequisite and command survive. Automatic activation and optional image/browser tools inside these CLI clients remain unverified.
+
+### Live GitHub showcase inspection
+
+Edge 157.0.4341.60 opened both [English](https://github.com/whale-devx/github-markdown-studio-skills/blob/785bf30485ed01e32ef03774583fe841b8e140c3/examples/advanced-formatting.en.md) and [Thai](https://github.com/whale-devx/github-markdown-studio-skills/blob/785bf30485ed01e32ef03774583fe841b8e140c3/examples/advanced-formatting.th.md) on github.com. Playwright used fresh signed-out contexts with light/dark OS preferences and viewport widths of 360 and 1280 pixels, height 800. All eight pages returned HTTP 200. Each rendered article had one table, five details elements and ten preformatted blocks. Clicking the first summary opened its details. The picture loaded the matching locale/theme SVG at intrinsic width 640 in every context.
+
+The article DOM also contained one alert, a footnote reference, two checkboxes, two pinned line links, six math elements and four diagram frames per page. These counts verify the surrounding markup. Inspect the interactive Mermaid, map and STL contents, highlighting, line navigation and mobile readability separately before claiming visual acceptance. These observations apply to repository files at the linked revision. Other GitHub surfaces and comparative reader evaluations remain outstanding.
+
 ## Global skill update on Windows (2026-11-20)
 
 Ran `npx skills update github-markdown-studio -g -y` against an existing installation. The CLI reported one updated skill. The installed entry point matched the repository text at `9a966ad`, and the installed references contained the new editorial review guidance. This exercised an update followed by explicit use in Codex. Fresh installation and automatic discovery remain separate checks.

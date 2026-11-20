@@ -29,6 +29,15 @@ render = load("render_diagram")
 capability_plan = load("capability_plan")
 
 
+def make_test_symlink(link, target):
+    try:
+        link.symlink_to(target)
+    except OSError as error:
+        if getattr(error, "winerror", None) == 1314:
+            raise unittest.SkipTest("Windows requires permission to create symlinks") from error
+        raise
+
+
 class AuditTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
@@ -143,7 +152,7 @@ class AuditTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as external:
             target = Path(external) / "outside.md"
             target.write_text("# Private", encoding="utf-8")
-            (self.root / "linked.md").symlink_to(target)
+            make_test_symlink(self.root / "linked.md", target)
             self.assertIn("LINK_PATH", self.codes(self.report("[Outside](linked.md)")))
 
     def test_external_links_not_fetched(self):
@@ -247,6 +256,14 @@ class RenderTests(unittest.TestCase):
         for name, expected in manifest["files"].items():
             self.assertEqual(hashlib.sha256(assets[name].encode()).hexdigest(), expected)
 
+    def test_written_svg_hashes_match_manifest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            render.write_assets(output, render.build_assets(self.spec))
+            manifest = json.loads((output / "workflow.manifest.json").read_bytes())
+            for name, expected in manifest["files"].items():
+                self.assertEqual(hashlib.sha256((output / name).read_bytes()).hexdigest(), expected)
+
     def test_deterministic(self):
         self.assertEqual(render.build_assets(self.spec), render.build_assets(self.spec))
 
@@ -300,7 +317,7 @@ class RenderTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "target").write_text("original")
-            (root / "a.svg").symlink_to(root / "target")
+            make_test_symlink(root / "a.svg", root / "target")
             with self.assertRaises(ValueError):
                 render.write_assets(root, {"a.svg": "replacement"}, True)
             self.assertEqual((root / "target").read_text(), "original")
