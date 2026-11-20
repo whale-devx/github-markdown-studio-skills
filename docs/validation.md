@@ -6,6 +6,21 @@ This record separates actual local checks from planned integration work. It is n
 
 ## Windows beta-readiness check (2026-11-20)
 
+### Follow-up on the first-run guide, 2026-11-21
+
+Codex desktop 26.1111.2228.0 on Windows explicitly used GitHub Markdown Studio
+in maintainer mode with the [first-run fixture](../evals/first-run-guide.json)
+from `f223281`. In a temporary directory the agent inspected both inputs,
+retained the original prerequisite and command, and appended one sentence
+giving the expected output as `Ready`. Running the fixture's Python command
+printed exactly `Ready`. The script's SHA-256 stayed unchanged, and the
+original guide remained an exact prefix of the edited guide. The strict audit
+of the edited file reported one file, zero errors and zero warnings.
+
+The evaluator could see the rubric. This is a repeatable explicit-edit
+observation. Blinded reader trials, project-only discovery and the blocked
+Copilot CLI edit trial are still open.
+
 The starting revision was `785bf30`. On Windows with Python 3.12, the original 131-test suite had three errors: one locale-dependent read of a Thai fixture and two attempts to create symlinks without the Windows privilege. After the fixes, 133 tests ran, 131 passed and only the two privilege-dependent cases skipped locally. SVG regeneration matched the tracked assets byte for byte. The new on-disk digest test covers Windows newline conversion.
 
 ### Fresh project installation and runtime
@@ -81,8 +96,8 @@ python skills/github-markdown-studio/scripts/render_diagram.py examples/workflow
 
 The browser review is a local development check, not part of the bundled regression suite. The GitHub Actions workflow is configured for Python 3.10 and 3.13; a workflow configuration is not proof that a remote run has passed. Dependency ranges allow compatible minor updates, so record the resolved versions when reproducing a result.
 
-## Not yet verified
+## Outstanding checks after the dated runs
 
-Actual `npx skills` installation and invocation in an agent; actual GitHub light/dark rendering; live Mermaid rendering; remote link availability; image generation through an AI model; native review of additional languages; comparative agent benchmarks. Local CLI installation was not executed because the environment could not reach GitHub/package services and its Node.js 22.16.0 is below the current Skills CLI's documented 22.20 minimum.
+The Windows entries above cover installation, explicit host use and the GitHub showcase in two themes. Project-only discovery, interactive diagram contents, remote link availability, host image generation, native review of additional languages and comparative agent benchmarks remain open.
 
 The Arabic renderer test is a structural smoke test, not native linguistic or visual approval. English and Thai examples were reviewed as authored content, not certified by an independent translation reviewer.
