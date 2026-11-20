@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "method": "deterministic-svg",
+  "ai_generated": false,
+  "source_spec_sha256": "fea8794fa55f80d14d1b8f135e01cf3980734a6d5c0d345d884bb55afd89b49e",
+  "files": {
+    "workflow.en.light.svg": "1474ebaafb00691202057532e486a3e8dfa1da0958bf2b70010a8e684c57f421",
+    "workflow.en.dark.svg": "af3e8c06fc9f5007b8f151bcadf3bdead7368c89de4541f9641f7d33658bb69f",
+    "workflow.th.light.svg": "b02a434222e73f7ea1f246fc8c22c7443f5833e3b15d246cf708143161648399",
+    "workflow.th.dark.svg": "9c41c12a7e0b22af2d618df7015165bfba997a29e2e98b73c7eec87970c54cf9"
+  },
+  "review": "Inspect text shaping, legibility and meaning in each locale; generation is not visual approval."
+}

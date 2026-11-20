@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="662" viewBox="0 0 640 662" role="img" aria-labelledby="title desc" xml:lang="th">
+<title id="title">ทำเอกสารให้เข้าใจง่ายขึ้น</title>
+<desc id="desc">สกิลเดียว ดูแลทุก Markdown โดยเริ่มจากหลักฐาน: เข้าใจข้อมูลต้นทาง. อ่านโค้ด เป้าหมายเอกสาร และกลุ่มผู้อ่าน; เลือกภาพช่วยอธิบาย. เลือกข้อความ แผนภาพ หรือภาพประกอบให้ตรงงาน; ปรับธีมและภาษา. รักษาความหมายและองค์ประกอบให้ตรงกันทุกแบบ; ตรวจสอบและรายงาน. แยกสิ่งที่ตรวจแล้วออกจากสิ่งที่ยังไม่ได้ทดสอบ</desc>
+<rect width="640" height="662" rx="20" fill="#0d1117"/>
+<g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<text x="40" y="53" fill="#f0f6fc" font-size="24" font-weight="700" text-anchor="start" direction="ltr">ทำเอกสารให้เข้าใจง่ายขึ้น</text>
+<text x="40" y="86" fill="#b7c4d5" font-size="15" font-weight="400" text-anchor="start" direction="ltr">สกิลเดียว ดูแลทุก Markdown โดยเริ่มจากหลักฐาน</text>
+<rect x="32" y="116" width="576" height="98" rx="14" fill="#161b22" stroke="#39495c"/>
+<circle cx="70" cy="154" r="18" fill="#5eead4"/>
+<text x="70" y="160" text-anchor="middle" fill="#161b22" font-size="16" font-weight="700">1</text>
+<text x="108" y="155" fill="#f0f6fc" font-size="20" font-weight="650" text-anchor="start" direction="ltr">เข้าใจข้อมูลต้นทาง</text>
+<text x="108" y="185" fill="#b7c4d5" font-size="14" font-weight="400" text-anchor="start" direction="ltr">อ่านโค้ด เป้าหมายเอกสาร และกลุ่มผู้อ่าน</text>
+<path d="M320 217 v16 m-5 -5 5 5 5 -5" fill="none" stroke="#5eead4" stroke-width="2"/>
+<rect x="32" y="240" width="576" height="98" rx="14" fill="#161b22" stroke="#39495c"/>
+<circle cx="70" cy="278" r="18" fill="#5eead4"/>
+<text x="70" y="284" text-anchor="middle" fill="#161b22" font-size="16" font-weight="700">2</text>
+<text x="108" y="279" fill="#f0f6fc" font-size="20" font-weight="650" text-anchor="start" direction="ltr">เลือกภาพช่วยอธิบาย</text>
+<text x="108" y="309" fill="#b7c4d5" font-size="14" font-weight="400" text-anchor="start" direction="ltr">เลือกข้อความ แผนภาพ หรือภาพประกอบให้ตรงงาน</text>
+<path d="M320 341 v16 m-5 -5 5 5 5 -5" fill="none" stroke="#5eead4" stroke-width="2"/>
+<rect x="32" y="364" width="576" height="98" rx="14" fill="#161b22" stroke="#39495c"/>
+<circle cx="70" cy="402" r="18" fill="#5eead4"/>
+<text x="70" y="408" text-anchor="middle" fill="#161b22" font-size="16" font-weight="700">3</text>
+<text x="108" y="403" fill="#f0f6fc" font-size="20" font-weight="650" text-anchor="start" direction="ltr">ปรับธีมและภาษา</text>
+<text x="108" y="433" fill="#b7c4d5" font-size="14" font-weight="400" text-anchor="start" direction="ltr">รักษาความหมายและองค์ประกอบให้ตรงกันทุกแบบ</text>
+<path d="M320 465 v16 m-5 -5 5 5 5 -5" fill="none" stroke="#5eead4" stroke-width="2"/>
+<rect x="32" y="488" width="576" height="98" rx="14" fill="#161b22" stroke="#39495c"/>
+<circle cx="70" cy="526" r="18" fill="#5eead4"/>
+<text x="70" y="532" text-anchor="middle" fill="#161b22" font-size="16" font-weight="700">4</text>
+<text x="108" y="527" fill="#f0f6fc" font-size="20" font-weight="650" text-anchor="start" direction="ltr">ตรวจสอบและรายงาน</text>
+<text x="108" y="557" fill="#b7c4d5" font-size="14" font-weight="400" text-anchor="start" direction="ltr">แยกสิ่งที่ตรวจแล้วออกจากสิ่งที่ยังไม่ได้ทดสอบ</text>
+</g>
+</svg>

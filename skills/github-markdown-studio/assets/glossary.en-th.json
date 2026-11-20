@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source_language": "en",
+  "target_language": "th",
+  "terms": {
+    "source of truth": "แหล่งข้อมูลหลัก",
+    "verification": "การตรวจสอบ",
+    "fallback image": "ภาพสำรอง",
+    "translation drift": "คำแปลที่อาจล้าหลังต้นฉบับ",
+    "diagram": "แผนภาพ",
+    "illustration": "ภาพประกอบ"
+  },
+  "preserve_literals": ["GitHub", "Markdown", "Mermaid", "SKILL.md", "README.md", "AGENTS.md", "npx skills"]
+}

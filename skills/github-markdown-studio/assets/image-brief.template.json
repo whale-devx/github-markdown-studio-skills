@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "purpose": "Explain one verified concept more clearly than prose alone",
+  "audience": "Specify the intended reader",
+  "verified_facts": [],
+  "source_references": [],
+  "composition": "One canonical layout, reused across theme and language variants",
+  "existing_brand_assets": [],
+  "themes": ["light", "dark"],
+  "locales": ["en", "th"],
+  "embedded_text": "Avoid; keep critical labels, commands and numbers in Markdown",
+  "caption": {},
+  "alt_text": {},
+  "prohibited_implications": ["Invented UI", "Unverified performance", "Changed logo geometry"],
+  "generation_status": "not-run",
+  "tool": null,
+  "output_files": [],
+  "human_review_status": "not-run"
+}
