@@ -19,6 +19,15 @@
 - [x] Add deterministic regression cases demonstrating identical decisions across different agent labels.
 - [ ] Execute actual install, activation and end-to-end tasks separately on multiple supported agent hosts.
 
+## Advanced formatting (v0.3.0 development)
+
+- [x] Document all ten official advanced-formatting topics and the four native diagram formats.
+- [x] Add surface-aware offline diagnostics and explicit manual/renderer limits.
+- [x] Add linked English/Thai examples, transformation patterns and source inventory.
+- [x] Add structural and false-positive regression tests without provider dependencies.
+- [ ] Run actual GitHub previews for each target surface, theme and viewport.
+- [ ] Run agent-level authoring/transformation evaluations against held-out projects.
+
 ## Next validation work
 
 - [ ] Exercise actual skill installation and invocation in selected supported agents.

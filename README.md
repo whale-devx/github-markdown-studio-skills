@@ -66,6 +66,14 @@ For a non-editing review, ask for `audit`. The other modes are `create`, `improv
 
 Other locales can follow the workflow, but are not all linguistically or visually tested. The helpers do not automatically translate prose, execute quick starts, contact remote links, render Mermaid or certify GitHub's actual output.
 
+## Advanced formatting, beyond README
+
+All ten topics in GitHub's advanced-formatting catalog have source-backed guidance, English/Thai examples and explicit audit limits: tables, collapsed sections, code blocks, diagrams, math, autolinks, attachments, task lists, permanent code links and workflow keywords. Diagram guidance includes **Mermaid, GeoJSON, TopoJSON and ASCII STL**, not Mermaid alone.
+
+The audit now distinguishes repository files from conversation/workflow text using `--surface` and `--pr-target`. It performs bounded structural checks, not full grammar validation or live rendering. No provider SDK, model-specific fork, image service or extra package is required by this addition.
+
+[Formatting guide](skills/github-markdown-studio/references/advanced-formatting.md) · [English showcase](examples/advanced-formatting.en.md) · [Thai showcase](examples/advanced-formatting.th.md) · [Coverage and limits](skills/github-markdown-studio/assets/formatting-coverage.json)
+
 ## How it works
 
 <picture>

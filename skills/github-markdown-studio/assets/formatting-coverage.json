@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-20",
+  "scope": "All ten topics in the GitHub advanced-formatting index; knowledge coverage is not complete automated validation.",
+  "index_url": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting",
+  "topics": [
+    {
+      "id": "tables",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables",
+      "examples": [
+        "examples/advanced-formatting.en.md#tables",
+        "examples/advanced-formatting.th.md#tables"
+      ],
+      "automated_rules": [
+        "TABLE_COLUMNS"
+      ],
+      "manual_review": "Header grammar, layout, semantics and escaped content"
+    },
+    {
+      "id": "collapsed-sections",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections",
+      "examples": [
+        "examples/advanced-formatting.en.md#collapsed-sections",
+        "examples/advanced-formatting.th.md#collapsed-sections"
+      ],
+      "automated_rules": [
+        "DETAILS_SUMMARY",
+        "DETAILS_UNCLOSED",
+        "DETAILS_ORPHAN",
+        "SUMMARY_ORPHAN"
+      ],
+      "manual_review": "Summary meaning, blank lines and keyboard behavior"
+    },
+    {
+      "id": "code-blocks",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks",
+      "examples": [
+        "examples/advanced-formatting.en.md#code-blocks",
+        "examples/advanced-formatting.th.md#code-blocks"
+      ],
+      "automated_rules": [
+        "FENCE_UNCLOSED"
+      ],
+      "manual_review": "Linguist support, list indentation, diff application and actual execution"
+    },
+    {
+      "id": "diagrams",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams",
+      "examples": [
+        "examples/advanced-formatting.en.md#diagrams",
+        "examples/advanced-formatting.th.md#diagrams"
+      ],
+      "automated_rules": [
+        "DIAGRAM_JSON",
+        "DIAGRAM_STRUCTURE",
+        "SPECIAL_BLOCK_EMPTY",
+        "STL_STRUCTURE"
+      ],
+      "manual_review": "Mermaid grammar, nested map geometry, topology, mesh validity and all live rendering"
+    },
+    {
+      "id": "mathematics",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions",
+      "examples": [
+        "examples/advanced-formatting.en.md#mathematics",
+        "examples/advanced-formatting.th.md#mathematics"
+      ],
+      "automated_rules": [
+        "MATH_FENCE_DELIMITERS",
+        "MATH_BLOCK_UNCLOSED"
+      ],
+      "manual_review": "Inline math, TeX macros, mathematical truth and MathJax rendering"
+    },
+    {
+      "id": "autolinks",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls",
+      "examples": [
+        "examples/advanced-formatting.en.md#autolinks",
+        "examples/advanced-formatting.th.md#autolinks"
+      ],
+      "automated_rules": [
+        "AUTOLINK_SURFACE"
+      ],
+      "manual_review": "Remote existence, commit/label/custom-link expansion and backlinks"
+    },
+    {
+      "id": "attachments",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files",
+      "examples": [
+        "examples/advanced-formatting.en.md#attachments",
+        "examples/advanced-formatting.th.md#attachments"
+      ],
+      "automated_rules": [
+        "BROKEN_LOCAL_LINK",
+        "IMAGE_ALT",
+        "IMAGE_SRC"
+      ],
+      "manual_review": "Authorized upload, returned URL, visibility, size, file type and codec"
+    },
+    {
+      "id": "task-lists",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/about-tasklists",
+      "examples": [
+        "examples/advanced-formatting.en.md#task-lists",
+        "examples/advanced-formatting.th.md#task-lists"
+      ],
+      "automated_rules": [
+        "TASK_MARKER",
+        "TASKLIST_RETIRED"
+      ],
+      "manual_review": "Completion evidence, interactive issue state and sub-issues"
+    },
+    {
+      "id": "permalinks",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-a-permanent-link-to-a-code-snippet",
+      "examples": [
+        "examples/advanced-formatting.en.md#permalinks",
+        "examples/advanced-formatting.th.md#permalinks"
+      ],
+      "automated_rules": [
+        "PERMALINK_MUTABLE",
+        "PERMALINK_LINES",
+        "PERMALINK_MARKDOWN"
+      ],
+      "manual_review": "Remote SHA/path/range existence and comment-only snippet expansion"
+    },
+    {
+      "id": "keywords",
+      "source": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests",
+      "examples": [
+        "examples/advanced-formatting.en.md#keywords",
+        "examples/advanced-formatting.th.md#keywords"
+      ],
+      "automated_rules": [
+        "CLOSING_CONTEXT",
+        "CLOSING_TARGET",
+        "DUPLICATE_CONTEXT"
+      ],
+      "manual_review": "Authorization, actual target branch, cross-repository references and workflow effects"
+    }
+  ],
+  "diagram_formats": [
+    "mermaid",
+    "geojson",
+    "topojson",
+    "stl"
+  ],
+  "related": [
+    "alerts",
+    "footnotes",
+    "relative-links",
+    "anchors",
+    "theme-pictures",
+    "multilingual",
+    "safe-html"
+  ],
+  "verification": {
+    "github_render": "not-run",
+    "agent_evaluations": "not-run"
+  }
+}

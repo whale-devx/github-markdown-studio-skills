@@ -1,11 +1,11 @@
 ---
 name: github-markdown-studio
-description: Create, improve, audit, and synchronize GitHub-rendered Markdown across a repository, not just README files. Use for documentation readability, tutorials, architecture, API references, runbooks, contribution guides, agent instructions, dark/light images, multilingual documentation, Mermaid diagrams, and explanatory image generation. Preserve factual evidence, machine-readable metadata, brand identity, and the requested editing scope.
+description: Create, improve, audit, and synchronize GitHub-rendered Markdown across a repository, not just README files. Use for documentation readability, tutorials, architecture, API references, runbooks, contribution guides, agent instructions, dark/light images, multilingual documentation, advanced formatting (tables, details, code, Mermaid/GeoJSON/TopoJSON/STL, math, autolinks, attachments, tasks, permalinks and workflow keywords), and explanatory image generation. Preserve factual evidence, machine-readable metadata, brand identity, and the requested editing scope.
 license: MIT
 compatibility: Vendor-neutral Agent Skills format. Core writing instructions require host-provided document context and editing capability to apply changes. Optional offline helpers need Python 3.10+; image creation and browser verification require separately available host tools.
 metadata:
   author: whale-devx
-  version: "0.2.0-dev"
+  version: "0.3.0-dev"
 ---
 
 # GitHub Markdown Studio
@@ -19,6 +19,12 @@ Support `.md` and `.markdown` rendered on GitHub: README, guides, tutorials, ref
 Do not treat MDX, GitHub Pages, wiki navigation, or a documentation-site renderer as interchangeable with repository Markdown. Preserve their existing toolchain or explicitly report that it is outside this version's automated checks. Do not modify application code just to make a documentation claim true.
 
 Choose the narrowest requested scope: one file, a directory, changed documentation, or an explicitly requested repository-wide pass. Read repository instructions and existing conventions. Do not rewrite every Markdown file merely because the skill can.
+
+## Advanced-formatting contract
+
+Understand, select, generate, audit and transform all ten topics in the dated GitHub advanced-formatting catalog. Read [advanced formatting](references/advanced-formatting.md) and [transformation patterns](references/formatting-patterns.md) when relevant; consult the [coverage inventory](assets/formatting-coverage.json) for sources, examples and automation limits. Do not confuse complete topic coverage with complete automatic grammar validation.
+
+Declare the destination before writing: repository document, wiki, issue, PR description, discussion, comment or commit message. Shorthand references, snippet expansion, uploads, footnotes and closing keywords do not behave identically across these surfaces. Use explicit links in repository files; never invent an upload URL, issue ID or commit SHA. Do not publish workflow markers without permission. Keep explanatory text, themes and localized variants consistent; use maps, math or STL only when they serve the document.
 
 ## Modes
 
@@ -104,12 +110,12 @@ Inspect bundled scripts before running them. Resolve script paths relative to th
 
 ```bash
 python <skill-dir>/scripts/capability_plan.py --input <host-capabilities.json>
-python <skill-dir>/scripts/audit.py <repo-root> docs README.md --json
+python <skill-dir>/scripts/audit.py <repo-root> docs README.md --surface repository --json
 python <skill-dir>/scripts/audit.py <repo-root> --translations i18n-manifest.json --strict
 python <skill-dir>/scripts/render_diagram.py <diagram-spec.json> --output <asset-directory>
 ```
 
-The audit helper checks local link targets, approximate heading fragments, image alt text, theme-picture structure, some unsafe HTML, skill frontmatter and optional translation drift. It never runs project code, contacts URLs, translates text, or certifies GitHub rendering. It is a targeted checker, not a full security scanner, accessibility certification, or complete Markdown linter.
+The audit helper checks local link targets, approximate heading fragments, image alt text, theme-picture structure, some unsafe HTML, skill frontmatter and optional translation drift. It never runs project code, contacts URLs, translates text, or certifies GitHub rendering. It also applies surface-aware advanced-structure checks for tables, details, fences, maps, STL boundaries, math delimiters, tasks, permalinks and keyword contexts. `--surface` and `--pr-target` are declared context, not API verification. It is a targeted checker, not a full security scanner, accessibility certification, complete Markdown linter or live renderer. Footnotes remain a partial prose approximation, not a complete footnote parser.
 
 Separately review Mermaid meaning and syntax, quick-start commands in an isolated environment when authorized, external links when network access is allowed, and actual GitHub preview when accessible. Do not run unreviewed install scripts or use production secrets merely to obtain a passing report.
 

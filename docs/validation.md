@@ -4,7 +4,24 @@
 
 This record separates actual local checks from planned integration work. It is not an agent benchmark or a claim of universal GitHub compatibility.
 
-## Executed locally
+## v0.3 advanced-formatting validation (2026-11-20)
+
+Executed against this development change with Python 3.13.5, markdown-it-py 4.2.0 and PyYAML 6.0.3. No dependency was added.
+
+| Check | Actual result |
+| --- | --- |
+| Full regression suite | 131 tests passed (74 previous and 57 added) |
+| Strict repository audit | 20 Markdown files, 0 errors, 0 warnings |
+| English/Thai code/data parity | Passed for executable, math, GeoJSON, TopoJSON and STL fences |
+| Translation snapshots | README pair and new showcase pair synchronized after author review |
+| Coverage inventory | All ten official topics have sources, bilingual anchors, rule IDs and manual limits |
+| Existing visual assets | Regenerated offline; identical to the baseline Git files |
+
+Negative and false-positive cases cover every new diagnostic family, surface differences, all nine closing keywords, nested fences/details, table pipes, malformed map types, mathematical delimiters, retired tasklist blocks, code-line links, alerts, footnotes and inert code/comments. CLI tests check strict exit status and that audited files are unchanged.
+
+**Not run for v0.3:** live GitHub rendering, local visual review of the new showcases, Mermaid/MathJax/map/STL rendering, upload/issue workflow effects, external URL checks, installation or activation in actual agents, and comparative model evaluations. The pre-existing browser results below are historical, not validation of these new pages. English/Thai text was reviewed as authored content, not by an independent language reviewer. Static footnote handling is a prose approximation, not a complete footnote parser.
+
+## Historical v0.1/v0.2 local checks
 
 | Check | Result | Scope |
 | --- | --- | --- |
