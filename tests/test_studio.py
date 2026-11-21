@@ -303,6 +303,25 @@ class RenderTests(unittest.TestCase):
         self.assertIn('direction="rtl"', svg)
         self.assertIn('xml:lang="ar"', svg)
 
+    def test_rtl_flag_at_visible_width_limit(self):
+        content = copy.deepcopy(self.spec["locales"]["en"])
+        content["direction"] = "rtl"
+        detail = "استخدم \u2066--output\u2069 لحفظ التقرير في الملف، ثم راجعه قبل النشر."
+        content["steps"][0]["detail"] = detail
+        self.spec["locales"] = {"ar": content}
+        assets = render.build_assets(self.spec)
+        for theme in ("light", "dark"):
+            svg = ET.fromstring(assets[f"workflow.ar.{theme}.svg"])
+            self.assertIn(detail, [node.text for node in svg.findall(".//{*}text")])
+        content["steps"][0]["detail"] += "!"
+        with self.assertRaisesRegex(ValueError, "58 display columns"):
+            render.build_assets(self.spec)
+
+    def test_direction_isolates_without_label_text_are_rejected(self):
+        for opening in ("\u2066", "\u2067", "\u2068"):
+            with self.subTest(opening=ascii(opening)), self.assertRaises(ValueError):
+                render.label(opening + " " + "\u2069", 32, "title")
+
     def test_no_overwrite_without_flag(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
