@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "reader_results": [],
+  "tasks": [
+    {
+      "packet": "guide.md",
+      "source_revision": "c44beea485f0f2feaf460e2ac87fdd5608d63cf0",
+      "source_sections": ["Making changes", "Git tracks content not files"],
+      "decisions": [
+        {"number": 1, "required": ["Inspect the proposed patch with git diff --cached, git diff --staged or an equivalent command.", "The patch removes opens at 9 and adds opens at 10."]},
+        {"number": 2, "required": ["Compare the working file to the index using git diff or an equivalent command.", "The patch removes opens at 10 and adds opens at 11."]},
+        {"number": 3, "required": ["Commit the staged snapshot, for example with git commit and a message.", "The commit contains opens at 10 and the working file still contains opens at 11."]}
+      ],
+      "fatal_errors": ["Records opens at 11 in today's commit.", "Discards the saved opens at 11 edit."]
+    },
+    {
+      "packet": "reference.md",
+      "source_revision": "0ba1e9045642b1ad8d65f6f5bdd91f8d40118b77",
+      "source_sections": ["Offline snapshots", "Interpret the report"],
+      "decisions": [
+        {"number": 1, "required": ["Use 2030-05-03, when the listing was observed.", "Expect stale_snapshot because eleven days exceed the default seven-day limit."]},
+        {"number": 2, "required": ["The row has listed access.", "The report records not_executed."]},
+        {"number": 3, "required": ["The listing alone establishes neither permission to execute that model nor a successful handoff."]}
+      ],
+      "fatal_errors": ["Changes the observation date to evade the freshness check.", "Claims the listing verifies an executed handoff."]
+    },
+    {
+      "packet": "runbook.md",
+      "source_revision": "a15e6e024d39c93592f655d5a903c15342d5c45f",
+      "source_sections": ["Authority and supported scope", "New repositories: Release Please scaffold", "This repository's release activation"],
+      "decisions": [
+        {"number": 1, "required": ["Retain the existing release engine and follow its process.", "The helper refuses setup when it detects the existing engine."]},
+        {"number": 2, "required": ["Use python <skill>/scripts/flowkit.py --repo <repo> release-setup without --apply.", "The boundary is the current HEAD.", "The preview writes no scaffold files."]},
+        {"number": 3, "required": ["Wire or verify the project's required tests and review protections.", "The maintainer must explicitly enable the generated workflow. Permission to write local files alone does not activate it."]}
+      ],
+      "fatal_errors": ["Removes release tags or the existing release engine to force setup.", "Applies or activates the workflow under inspection-only permission."]
+    }
+  ]
+}
