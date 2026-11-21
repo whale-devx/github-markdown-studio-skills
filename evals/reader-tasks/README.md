@@ -39,3 +39,6 @@ outside Markdown Studio. Independent reader trials are pending.
 
 These public packets can also be used for practice. A person who has seen
 the questions or key needs a fresh task for a held-out comparison.
+
+For a comparison between authoring skills, use the
+[paired README and Mermaid requests](../skill-comparison/README.md).
