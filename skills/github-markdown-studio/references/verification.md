@@ -42,7 +42,9 @@ Review the URLs locally, including any identifying information in their paths. W
 python skills/github-markdown-studio/scripts/external_links.py . skills/github-markdown-studio/references/github-rendering.md --check https://github.com/github/markup
 ```
 
-The checker attempts one anonymous HTTPS HEAD request per distinct selected page. Repeat `--check` for up to 20 pages. Selection is validated against the entire inventory before the first DNS lookup. Fragments share a page check. Query-bearing links, credentials, contact schemes and unsupported URL forms appear only as omitted locations. For those links, review the original document locally.
+The checker attempts one anonymous HTTPS HEAD request per distinct selected page. Repeat `--check` for up to 20 pages. Selection is validated against the entire inventory before the first DNS lookup. Query-bearing links, credentials, contact schemes and unsupported URL forms appear only as omitted locations. For those links, review the original document locally.
+
+Links to different sections of one page share a single page check. A source location with a nonempty fragment carries `"fragment_status": "not-run"`, including when the page returns 200. The report omits the fragment text. Follow the link from the reported Markdown block and confirm the intended heading or passage comes into view.
 
 The checker uses system curl 7.59+ and system TLS trust. Use `--curl` with an absolute path if curl is installed elsewhere. It checks resolved addresses, pins them for the request, and disables curl configuration, proxies and redirects. Each transfer has a ten-second limit. Name resolution uses the system resolver. The helper sends no document body, authentication headers or cookies. The selected site still sees the requested path and the client's IP address. [curl options](https://curl.se/docs/manpage.html)
 

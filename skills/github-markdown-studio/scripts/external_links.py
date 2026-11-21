@@ -44,6 +44,8 @@ def inventory(root, paths):
         if page is None:
             omitted.append(location)
         else:
+            if raw.partition("#")[2]:
+                location["fragment_status"] = "not-run"
             pages.setdefault(page, []).append(location)
     return pages, omitted
 

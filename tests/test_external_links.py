@@ -43,6 +43,30 @@ class ExternalLinkTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "readable Markdown"):
                 links.report(self.root, ["guide.md", "absent.md"], [self.page], self.curl)
 
+    def test_page_check_leaves_nonempty_fragments_unchecked_at_their_source_locations(self):
+        (self.root / "mixed.md").write_text(
+            f"[page]({self.page}) and [section]({self.page}#private-section)\n\n"
+            f'<a href="{self.page}#:~:text=private-text">passage</a>\n\n'
+            f"[top]({self.page}#)\n\n[encoded]({self.page}%23part)\n",
+            encoding="utf-8",
+        )
+        for selected in ([], [self.page]):
+            with self.subTest(selected=selected), patch("external_links.check", return_value={
+                "status": "pass", "http_status": 200,
+            }) as check:
+                report = links.report(self.root, ["mixed.md"], selected, self.curl)
+                first, encoded = report["pages"]
+                self.assertEqual(first["status"], "pass" if selected else "not-run")
+                self.assertEqual([(loc["line"], loc.get("fragment_status")) for loc in first["locations"]],
+                                 [(1, None), (1, "not-run"), (3, "not-run"), (5, None)])
+                self.assertEqual(encoded["url"], self.page + "%23part")
+                self.assertNotIn("fragment_status", encoded["locations"][0])
+                self.assertNotIn("private-", json.dumps(report))
+                if selected:
+                    check.assert_called_once_with(self.page, self.curl)
+                else:
+                    check.assert_not_called()
+
     def test_unsupported_urls(self):
         for value in ("//example.org/a", "http://example.org", "https://user:secret@example.org/",
                       "https://example.org:444/", "https://127.0.0.1/", "https://localhost/",

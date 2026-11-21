@@ -30,6 +30,12 @@ The article DOM also contained one alert, a footnote reference, two checkboxes, 
 
 The offline inventory found 19 distinct pages across the [formatting guide](../skills/github-markdown-studio/references/advanced-formatting.md) and the [rendering guide](../skills/github-markdown-studio/references/github-rendering.md) at source revision `f223281`. Each URL was reviewed and selected for one anonymous HTTPS HEAD using curl 8.22.0. All 19 returned HTTP 200. This observation covers those pages on that date. Fragment targets, redirects on other pages, site content and reader access in other networks require separate verification. [Reproduce the check](../skills/github-markdown-studio/references/verification.md#check-selected-external-pages)
 
+### Wiki heading navigation (2026-11-21)
+
+The checker returned HTTP 200 for both the current VS Code contribution wiki and its pinned revision. The offline inventory and the selected-page report marked both section links as `fragment_status: not-run`. A link to the page itself shared the current-page request. [Wiki revision](https://github.com/microsoft/vscode/wiki/How-to-Contribute/6217f0572bd6d5d101f393765f2d175a901bff16)
+
+In signed-out Chrome 157.0.8103.79, pressing Enter on “Use the correct version of Node” opened the current page with the expected fragment. Opening the heading’s own permalink in a fresh tab kept the pinned revision. In both cases the heading stayed below the viewport after five seconds at 360 and 1280 pixels wide, in light and dark mode. Starting from the destination of the prose link, Page Down brought the heading fully into view in all four cases. The viewport height was 800 pixels.
+
 ## Global skill update on Windows (2026-11-20)
 
 Ran `npx skills update github-markdown-studio -g -y` against an existing installation. The CLI reported one updated skill. The installed entry point matched the repository text at `9a966ad`, and the installed references contained the new editorial review guidance. This exercised an update followed by explicit use in Codex. Fresh installation and automatic discovery remain separate checks.
