@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Count visible text when checking SVG label widths so RTL labels can isolate command-line flags at the column limit.
 - Preserve the SVG manifest's byte hashes when writing files on Windows.
 - Ignore footnote examples inside inline code when auditing wiki Markdown.
 - Exercise Windows in CI and document a live bilingual GitHub showcase check and a Copilot CLI audit.

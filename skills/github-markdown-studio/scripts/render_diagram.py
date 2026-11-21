@@ -20,6 +20,7 @@ PALETTES = {
     "dark": {"background": "#0d1117", "surface": "#161b22", "text": "#f0f6fc", "muted": "#b7c4d5", "accent": "#5eead4", "border": "#39495c"},
 }
 LANGUAGE = re.compile(r"[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*\Z")
+REMOVE_DIRECTION_ISOLATES = str.maketrans("", "", "\u2066\u2067\u2068\u2069")
 
 
 def display_width(text: str) -> int:
@@ -27,11 +28,14 @@ def display_width(text: str) -> int:
 
 
 def label(value: object, maximum: int, name: str) -> str:
-    if not isinstance(value, str) or not value.strip() or display_width(value) > maximum:
+    text = value if isinstance(value, str) else ""
+    # Measure the visible label and keep the original isolates for SVG layout.
+    visible = text.translate(REMOVE_DIRECTION_ISOLATES)
+    if not visible.strip() or display_width(visible) > maximum:
         raise ValueError(f"{name} must be non-empty text within {maximum} display columns; use shorter labels")
-    if any(unicodedata.category(c) in {"Cc", "Cs"} for c in value):
+    if any(unicodedata.category(c) in {"Cc", "Cs"} for c in text):
         raise ValueError(f"{name} contains control characters")
-    return value.strip()
+    return text.strip()
 
 
 def build_assets(spec: dict) -> dict[str, str]:

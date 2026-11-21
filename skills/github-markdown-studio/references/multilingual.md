@@ -27,3 +27,16 @@ Never refresh hashes just to make a check green. Review the source diff, update 
 Use a single canonical diagram topology and translate labels into locale-specific assets. Keep theme variants derived from that locale's same layout. Prefer short labels and a text explanation outside the image. For RTL, inspect text direction, numbering, arrows, mixed Latin identifiers and alignment. Do not mirror a causal flow without checking its meaning.
 
 The bundled SVG renderer accepts locale tags and an explicit `ltr` or `rtl` direction, but it is a fixed process-card layout, not a universal typography engine. It rejects long labels rather than silently clipping them. Browser/font review is still necessary.
+
+In an RTL label, isolate a left-to-right command-line option so its leading
+hyphens stay on the left. Write the Unicode escapes directly in the diagram
+JSON. This step keeps the flag visible as `--output`.
+
+```json
+{"title":"حفظ التقرير","detail":"استخدم \u2066--output\u2069 لحفظ التقرير."}
+```
+
+`\u2066` begins the left-to-right span and `\u2069` ends it. The renderer
+preserves both characters in the SVG and excludes them from the label width.
+Check a rendered asset in both themes when punctuation carries meaning.
+[W3C guidance on direction isolates](https://www.w3.org/International/questions/qa-bidi-unicode-controls.en)
