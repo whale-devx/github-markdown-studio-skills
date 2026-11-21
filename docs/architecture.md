@@ -8,6 +8,8 @@
 
 ```mermaid
 flowchart TD
+    accTitle: From document request to verification report
+    accDescr: The agent checks available tools and source evidence, then drafts text or selects a visual. Both paths go through a static audit and a separate visual and GitHub review before delivery.
     A[Requested document scope] --> B[Agent reads SKILL.md]
     B --> K[Observe host capabilities]
     K --> C[Relevant references and source evidence]
@@ -22,7 +24,8 @@ flowchart TD
     I --> J[Patch and honest verification report]
 ```
 
-This describes the intended skill workflow, not a runtime orchestrator implemented by the Python scripts. Mermaid rendering must be checked separately.
+The diagram shows the agent's workflow. The Python helpers handle the steps listed below.
+The [optional renderer check](validation.md#replay-the-mermaid-diagrams) verifies this diagram and the two localized examples.
 
 ## Components
 
