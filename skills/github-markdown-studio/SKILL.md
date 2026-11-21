@@ -121,6 +121,8 @@ The audit helper checks local link targets, approximate heading fragments, image
 
 Separately review Mermaid meaning and syntax, quick-start commands in an isolated environment when authorized, external links when network access is allowed, and actual GitHub preview when accessible. Do not run unreviewed install scripts or use production secrets merely to obtain a passing report.
 
+For external links, start with the [offline inventory](references/verification.md#check-selected-external-pages). Select the exact pages authorized for a live check and include their HTTP outcomes in the report.
+
 ### 8. Deliver a reviewable change
 
 Summarize the modified paths, reader-facing improvements, evidence used, and validation status. Use `pass`, `fail`, `not-run`, or `blocked` with reasons. Separate static checks, local visual review, GitHub preview, translation review, and executed examples.

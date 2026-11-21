@@ -1,3 +1,3 @@
-# Only needed for audit.py; the SVG renderer uses the Python standard library.
+# Markdown parsing for audit.py and external_links.py. The SVG renderer uses the standard library.
 markdown-it-py>=4.0,<5
 PyYAML>=6.0.2,<7
