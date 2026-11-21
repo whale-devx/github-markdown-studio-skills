@@ -28,6 +28,12 @@ Use WCAG contrast targets as a design baseline: at least 4.5:1 for ordinary text
 
 Mermaid should default to the host theme when possible. Do not hardcode colors or use a newer syntax merely because it works in another Mermaid renderer. Inspect GitHub's current Mermaid version when compatibility matters. The static audit helper does not parse or render Mermaid.
 
+For links to headings, use the link as a reader would. Focus it, press Enter
+and check that the intended heading is in view. Record the source revision
+and the destination URL when testing a wiki revision. A link in its text can
+point to the current page, and the browser can display the expected fragment
+while the heading stays below the viewport.
+
 ## Verification labels
 
 - `static`: file existence, syntax structure and local links inspected.
